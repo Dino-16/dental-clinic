@@ -3,11 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --primary: 14, 165, 233; /* sky-500 */
-  --primary-dark: 2, 132, 199; /* sky-600 */
-  --secondary: 15, 23, 42; /* slate-900 */
-  --accent: 16, 185, 129; /* emerald-500 */
-  --bg-main: 248, 250, 252; /* slate-50 */
+  --primary: 14, 165, 233;
+  /* sky-500 */
+  --primary-dark: 2, 132, 199;
+  /* sky-600 */
+  --secondary: 15, 23, 42;
+  /* slate-900 */
+  --accent: 16, 185, 129;
+  /* emerald-500 */
+  --bg-main: 248, 250, 252;
+  /* slate-50 */
 }
 
 @layer base {
@@ -18,7 +23,12 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
@@ -31,7 +41,7 @@
   .glass-card {
     @apply backdrop-blur-md bg-white/70 border border-white/40 shadow-xl shadow-slate-200/50;
   }
-  
+
   .btn-primary {
     @apply relative inline-flex items-center justify-center px-8 py-3.5 font-semibold text-white transition-all duration-300 bg-sky-600 rounded-2xl hover:bg-sky-700 hover:shadow-lg hover:shadow-sky-200 active:scale-95 overflow-hidden;
   }
@@ -53,9 +63,17 @@
   }
 
   @keyframes floating {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+    0% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+
+    100% {
+      transform: translateY(0px);
+    }
   }
 }
 

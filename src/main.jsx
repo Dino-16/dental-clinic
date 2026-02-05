@@ -3,8 +3,22 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+// High-level error logging for deployment debugging
+window.onerror = function (message, source, lineno, colno, error) {
+  console.error('GLOBAL ERROR:', message, 'at', source, lineno, colno);
+};
+
+import ErrorBoundary from './components/ErrorBoundary.jsx'
+
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  console.error('Failed to find root element');
+} else {
+  createRoot(rootElement).render(
+    <StrictMode>
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
+    </StrictMode>,
+  )
+}

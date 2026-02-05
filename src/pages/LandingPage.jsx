@@ -476,7 +476,7 @@ function LandingPage() {
                                             <div className="px-3 py-1 rounded-full bg-white text-[10px] font-bold text-sky-600 uppercase border border-sky-100">
                                                 {booking.service}
                                             </div>
-                                            <div className="text-[10px] font-bold text-slate-400">ID: {booking.id.slice(0, 8)}</div>
+                                            <div className="text-[10px] font-bold text-slate-400">ID: {String(booking.id || '').slice(0, 8)}</div>
                                         </div>
                                         <div className="text-lg font-bold text-slate-900 mb-1">{booking.name}</div>
                                         <div className="flex items-center gap-2 text-sm text-slate-500">

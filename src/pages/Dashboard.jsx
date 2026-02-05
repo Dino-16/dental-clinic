@@ -21,8 +21,8 @@ import {
     TrendingUp,
     ExternalLink,
     Trash2,
-    BrainCircuit,
-    ArrowUpRight
+    Sparkles,
+    ArrowRight
 } from 'lucide-react';
 import {
     format,
@@ -76,7 +76,7 @@ function Dashboard() {
                     { label: 'Total Bookings', value: bookings.length, icon: <CalendarIcon size={24} />, color: 'bg-blue-50 text-blue-600' },
                     { label: 'Confirmed Today', value: bookings.filter(b => isSameDay(new Date(b.date), new Date())).length, icon: <CheckCircle2 size={24} />, color: 'bg-emerald-50 text-emerald-600' },
                     { label: 'Total Patients', value: new Set(bookings.map(b => b.name)).size, icon: <Users size={24} />, color: 'bg-sky-50 text-sky-600' },
-                    { label: 'AI Responses', value: '48', icon: <BrainCircuit size={24} />, color: 'bg-indigo-50 text-indigo-600' },
+                    { label: 'AI Responses', value: '48', icon: <Sparkles size={24} />, color: 'bg-indigo-50 text-indigo-600' },
                 ].map((stat) => (
                     <div key={stat.label} className="bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm flex items-center justify-between group hover:shadow-lg hover:shadow-slate-100 transition-all duration-300">
                         <div>
@@ -154,15 +154,16 @@ function Dashboard() {
     );
 
     const renderPatients = () => {
-        const uniquePatients = Array.from(new Set(bookings.map(b => b.name))).map(name => {
-            const patientBookings = bookings.filter(b => b.name === name);
+        const uniquePatients = Array.from(new Set(bookings.map(b => b.name || 'Unknown'))).map(name => {
+            const patientBookings = bookings.filter(b => (b.name || 'Unknown') === name);
+            if (patientBookings.length === 0) return null;
             return {
                 name,
-                lastVisit: patientBookings[0].date,
+                lastVisit: patientBookings[0]?.date || 'No Date',
                 totalVisits: patientBookings.length,
-                service: patientBookings[0].service
+                service: patientBookings[0]?.service || 'General'
             };
-        });
+        }).filter(Boolean);
 
         return (
             <motion.div
@@ -465,9 +466,9 @@ function Dashboard() {
 
                 <div className="p-10 max-w-[1600px] mx-auto">
                     <AnimatePresence mode="wait">
-                        {activeTab === 'Overview' && <div key="overview">{renderOverview()}</div>}
+                        {activeTab === 'Overview' && <motion.div key="overview" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>{renderOverview()}</motion.div>}
                         {activeTab === 'Appointments' && (
-                            <div key="appointments">
+                            <motion.div key="appointments" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
                                 {viewMode === 'calendar' ? renderCalendar() : (
                                     <div className="bg-white rounded-[40px] border border-slate-100 p-8 shadow-sm">
                                         <h3 className="text-xl font-extrabold text-slate-900 tracking-tight mb-8">AI Reservation Ledger</h3>
@@ -514,11 +515,11 @@ function Dashboard() {
                                         </div>
                                     </div>
                                 )}
-                            </div>
+                            </motion.div>
                         )}
-                        {activeTab === 'Patients' && <div key="patients">{renderPatients()}</div>}
-                        {activeTab === 'Messages' && <div key="messages">{renderMessages()}</div>}
-                        {activeTab === 'Settings' && <div key="settings">{renderSettings()}</div>}
+                        {activeTab === 'Patients' && <motion.div key="patients" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>{renderPatients()}</motion.div>}
+                        {activeTab === 'Messages' && <motion.div key="messages" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>{renderMessages()}</motion.div>}
+                        {activeTab === 'Settings' && <motion.div key="settings" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>{renderSettings()}</motion.div>}
                     </AnimatePresence>
                 </div>
             </main>

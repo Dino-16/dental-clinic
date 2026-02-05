@@ -5,13 +5,23 @@ const BookingContext = createContext();
 
 export const BookingProvider = ({ children }) => {
     const [bookings, setBookings] = useState(() => {
-        const savedBookings = localStorage.getItem('smilecare_bookings');
-        return savedBookings ? JSON.parse(savedBookings) : [];
+        try {
+            const savedBookings = localStorage.getItem('smilecare_bookings');
+            return savedBookings ? JSON.parse(savedBookings) : [];
+        } catch (e) {
+            console.error('Failed to parse bookings from localStorage', e);
+            return [];
+        }
     });
 
     const [messages, setMessages] = useState(() => {
-        const savedMessages = localStorage.getItem('smilecare_messages');
-        return savedMessages ? JSON.parse(savedMessages) : [];
+        try {
+            const savedMessages = localStorage.getItem('smilecare_messages');
+            return savedMessages ? JSON.parse(savedMessages) : [];
+        } catch (e) {
+            console.error('Failed to parse messages from localStorage', e);
+            return [];
+        }
     });
 
     // Fetch from Supabase on load
@@ -47,27 +57,34 @@ export const BookingProvider = ({ children }) => {
         fetchBookings();
 
         // Subscribe to real-time changes
-        const subscription = supabase
-            .channel('public:bookings')
-            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'bookings' }, payload => {
-                const newBooking = {
-                    id: payload.new.id,
-                    name: payload.new.patient_name,
-                    service: payload.new.service,
-                    date: payload.new.booking_date,
-                    time: payload.new.booking_time,
-                    status: payload.new.status,
-                    timestamp: payload.new.created_at
-                };
-                setBookings(prev => [newBooking, ...prev]);
-            })
-            .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'bookings' }, payload => {
-                setBookings(prev => prev.filter(b => b.id !== payload.old.id));
-            })
-            .subscribe();
+        let subscription = null;
+        try {
+            subscription = supabase
+                .channel('public:bookings')
+                .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'bookings' }, payload => {
+                    const newBooking = {
+                        id: payload.new.id,
+                        name: payload.new.patient_name,
+                        service: payload.new.service,
+                        date: payload.new.booking_date,
+                        time: payload.new.booking_time,
+                        status: payload.new.status,
+                        timestamp: payload.new.created_at
+                    };
+                    setBookings(prev => [newBooking, ...prev]);
+                })
+                .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'bookings' }, payload => {
+                    setBookings(prev => prev.filter(b => b.id !== payload.old.id));
+                })
+                .subscribe();
+        } catch (err) {
+            console.error('Supabase subscription error:', err.message);
+        }
 
         return () => {
-            supabase.removeChannel(subscription);
+            if (supabase && subscription) {
+                supabase.removeChannel(subscription);
+            }
         };
     }, []);
 
