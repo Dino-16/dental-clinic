@@ -16,6 +16,8 @@ export const BookingProvider = ({ children }) => {
 
     // Fetch from Supabase on load
     useEffect(() => {
+        if (!supabase) return;
+
         const fetchBookings = async () => {
             try {
                 const { data, error } = await supabase
@@ -82,6 +84,8 @@ export const BookingProvider = ({ children }) => {
         // Optimized for local feel
         setBookings((prev) => [booking, ...prev]);
 
+        if (!supabase) return;
+
         // Persist to Supabase
         try {
             const { error } = await supabase
@@ -107,6 +111,8 @@ export const BookingProvider = ({ children }) => {
     const deleteBooking = async (id) => {
         // Optimistic update
         setBookings((prev) => prev.filter(b => b.id !== id));
+
+        if (!supabase) return;
 
         try {
             const { error } = await supabase
