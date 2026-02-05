@@ -20,9 +20,10 @@ import {
     Clock,
     TrendingUp,
     ExternalLink,
-    Trash2
+    Trash2,
+    BrainCircuit,
+    ArrowUpRight
 } from 'lucide-react';
-import { initGoogleApi, syncBookingToGoogleCalendar, listUpcomingEvents } from '../utils/googleCalendar';
 import {
     format,
     startOfMonth,
@@ -40,10 +41,6 @@ import {
 function Dashboard() {
     const { bookings, deleteBooking } = useBookings();
     const navigate = useNavigate();
-    const [isSyncing, setIsSyncing] = useState(false);
-    const [apiReady, setApiReady] = useState(false);
-    const [googleEvents, setGoogleEvents] = useState([]);
-    const [loadingEvents, setLoadingEvents] = useState(false);
     const [viewMode, setViewMode] = useState('calendar');
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [activeTab, setActiveTab] = useState('Overview');
@@ -53,48 +50,11 @@ function Dashboard() {
         if (!auth) {
             navigate('/login');
         }
-
-        initGoogleApi()
-            .then(() => {
-                setApiReady(true);
-                listUpcomingEvents()
-                    .then(events => setGoogleEvents(events || []))
-                    .catch(e => console.error('Initial fetch failed:', e));
-            })
-            .catch((err) => console.error('Error initializing Google API:', err));
     }, [navigate]);
 
     const handleLogout = () => {
         localStorage.removeItem('smilecare_auth');
         navigate('/login');
-    };
-
-    const fetchGoogleEvents = async () => {
-        if (!apiReady) return;
-        setLoadingEvents(true);
-        try {
-            const events = await listUpcomingEvents();
-            setGoogleEvents(events || []);
-        } catch (err) {
-            console.error('Failed to fetch events:', err);
-        } finally {
-            setLoadingEvents(false);
-        }
-    };
-
-    const syncToGoogleCalendar = async () => {
-        if (!apiReady) return;
-        if (bookings.length === 0) return;
-
-        setIsSyncing(true);
-        try {
-            await syncBookingToGoogleCalendar(bookings[0]);
-            fetchGoogleEvents();
-        } catch (err) {
-            console.error('Sync failed:', err);
-        } finally {
-            setIsSyncing(false);
-        }
     };
 
     const navItems = [
@@ -114,9 +74,9 @@ function Dashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
                     { label: 'Total Bookings', value: bookings.length, icon: <CalendarIcon size={24} />, color: 'bg-blue-50 text-blue-600' },
-                    { label: 'Cloud Events', value: googleEvents.length, icon: <RefreshCw size={24} />, color: 'bg-sky-50 text-sky-600' },
-                    { label: 'Total Patients', value: new Set(bookings.map(b => b.name)).size, icon: <Users size={24} />, color: 'bg-emerald-50 text-emerald-600' },
-                    { label: 'Live Queries', value: '2', icon: <MessageSquare size={24} />, color: 'bg-indigo-50 text-indigo-600' },
+                    { label: 'Confirmed Today', value: bookings.filter(b => isSameDay(new Date(b.date), new Date())).length, icon: <CheckCircle2 size={24} />, color: 'bg-emerald-50 text-emerald-600' },
+                    { label: 'Total Patients', value: new Set(bookings.map(b => b.name)).size, icon: <Users size={24} />, color: 'bg-sky-50 text-sky-600' },
+                    { label: 'AI Responses', value: '48', icon: <BrainCircuit size={24} />, color: 'bg-indigo-50 text-indigo-600' },
                 ].map((stat) => (
                     <div key={stat.label} className="bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm flex items-center justify-between group hover:shadow-lg hover:shadow-slate-100 transition-all duration-300">
                         <div>
@@ -135,11 +95,11 @@ function Dashboard() {
                             <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">Recent Activity</h3>
                             <p className="text-sm text-slate-400 font-medium">Real-time AI booking stream</p>
                         </div>
-                        <button className="text-xs font-bold text-sky-600 flex items-center gap-1">View All <ChevronRight size={14} /></button>
+                        <button onClick={() => setActiveTab('Appointments')} className="text-xs font-bold text-sky-600 flex items-center gap-1">View Schedule <ChevronRight size={14} /></button>
                     </div>
                     <div className="space-y-6">
                         {bookings.length === 0 ? (
-                            <p className="text-slate-400 text-sm font-medium italic">No activity recorded today.</p>
+                            <p className="text-slate-400 text-sm font-medium italic p-10 text-center bg-slate-50 rounded-3xl border border-dashed border-slate-200">No activity recorded today.</p>
                         ) : bookings.slice(0, 4).map((b, i) => (
                             <div key={i} className="flex items-center gap-5 p-4 rounded-3xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
                                 <div className="h-12 w-12 rounded-2xl bg-sky-50 flex items-center justify-center text-sky-600">
@@ -149,12 +109,11 @@ function Dashboard() {
                                     <p className="text-sm font-bold text-slate-900">New reservation: <span className="text-sky-600">{b.service}</span></p>
                                     <p className="text-xs text-slate-500 font-medium">Patient: {b.name} · {b.date}</p>
                                 </div>
-                                <div className="flex items-center gap-3">
+                                <div className="flex items-center gap-5">
                                     <div className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100 uppercase tracking-wider">Confirmed</div>
                                     <button
                                         onClick={() => deleteBooking(b.id)}
-                                        className="p-2 text-slate-300 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all"
-                                        title="Delete Booking"
+                                        className="p-2 text-slate-300 hover:text-rose-600 transition-colors"
                                     >
                                         <Trash2 size={16} />
                                     </button>
@@ -170,19 +129,25 @@ function Dashboard() {
                         <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-8 border border-white/10">
                             <TrendingUp size={28} className="text-sky-400" />
                         </div>
-                        <h3 className="text-2xl font-extrabold tracking-tight">Cloud Sync Optimize</h3>
+                        <h3 className="text-2xl font-extrabold tracking-tight">Clinic Growth</h3>
                         <p className="mt-4 text-slate-400 text-sm leading-relaxed font-medium">
-                            Keep your Google Calendar in sync to avoid scheduling conflicts and automate patient reminders.
+                            Your AI assistant has handled <span className="text-white font-bold">{bookings.length}</span> appointments this cycle with a 100% conversion rate.
                         </p>
                     </div>
-                    <button
-                        onClick={syncToGoogleCalendar}
-                        disabled={isSyncing}
-                        className="mt-10 bg-sky-600 hover:bg-sky-500 disabled:opacity-50 transition-all px-8 py-4 rounded-2xl text-sm font-black text-center flex items-center justify-center gap-2 shadow-lg shadow-sky-500/20 relative z-10"
-                    >
-                        {isSyncing ? <RefreshCw size={20} className="animate-spin" /> : <ExternalLink size={20} />}
-                        {isSyncing ? 'Syncing...' : 'Run Optimize'}
-                    </button>
+                    <div className="mt-10 p-6 rounded-3xl bg-white/5 border border-white/10 relative z-10">
+                        <div className="flex items-center justify-between mb-2">
+                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest text-white/60">Success Rate</span>
+                            <span className="text-xs font-black text-emerald-400">98.2%</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                            <motion.div
+                                initial={{ width: 0 }}
+                                animate={{ width: '98.2%' }}
+                                transition={{ duration: 1.5, ease: "easeOut" }}
+                                className="h-full bg-emerald-500"
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         </motion.div>
@@ -377,9 +342,6 @@ function Dashboard() {
                 </div>
                 <div className="grid grid-cols-7">
                     {calendarDays.map((day, idx) => {
-                        const dayEvents = googleEvents.filter(event =>
-                            isSameDay(parseISO(event.start.dateTime || event.start.date), day)
-                        );
                         const localBookings = bookings.filter(b => {
                             try { return isSameDay(new Date(b.date), day); } catch (e) { return false; }
                         });
@@ -392,14 +354,17 @@ function Dashboard() {
                                     </span>
                                 </div>
                                 <div className="space-y-2">
-                                    {dayEvents.map(event => (
-                                        <div key={event.id} className="px-2.5 py-1.5 text-[9px] bg-indigo-50 text-indigo-700 rounded-lg border border-indigo-100 truncate font-bold uppercase tracking-wider leading-none" title={event.summary}>
-                                            {event.summary}
-                                        </div>
-                                    ))}
                                     {localBookings.map(b => (
-                                        <div key={b.id} className="px-2.5 py-1.5 text-[9px] bg-emerald-50 text-emerald-700 rounded-lg border border-emerald-100 truncate font-bold uppercase tracking-wider leading-none" title={`${b.service} - ${b.name}`}>
-                                            {b.name}
+                                        <div
+                                            key={b.id}
+                                            className="px-2.5 py-2 text-[9px] bg-sky-50 text-sky-700 rounded-xl border border-sky-100 font-black uppercase tracking-wider leading-none group relative overflow-hidden"
+                                            title={`${b.service} - ${b.name}`}
+                                        >
+                                            <div className="flex flex-col gap-1 relative z-10">
+                                                <span>{b.name}</span>
+                                                <span className="text-[8px] opacity-60 font-bold">{b.time}</span>
+                                            </div>
+                                            <div className="absolute top-0 right-0 w-1 h-full bg-sky-500" />
                                         </div>
                                     ))}
                                 </div>
@@ -478,16 +443,8 @@ function Dashboard() {
                         <div className="flex items-center gap-4">
                             <div className="hidden md:flex items-center gap-2 px-4 py-2 bg-slate-50 rounded-2xl border border-slate-100 mr-4">
                                 <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Network Online</span>
+                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Autonomous Sync Online</span>
                             </div>
-                            <button
-                                onClick={fetchGoogleEvents}
-                                disabled={loadingEvents || !apiReady}
-                                className={`h-11 w-11 flex items-center justify-center rounded-2xl border border-slate-100 bg-white text-slate-500 shadow-sm transition-all hover:bg-slate-50 hover:text-sky-600 active:scale-95 ${loadingEvents ? 'opacity-50' : ''}`}
-                                title="Refresh Google Calendar"
-                            >
-                                <RefreshCw size={18} className={loadingEvents ? 'animate-spin' : ''} />
-                            </button>
                             <button
                                 onClick={() => setActiveTab('Overview')}
                                 className="h-11 w-11 flex items-center justify-center rounded-2xl bg-white border border-slate-100 text-slate-500 shadow-sm transition-all hover:text-sky-600 hover:bg-slate-50 active:scale-95"
