@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --primary: 14, 165, 233;
-  /* sky-500 */
-  --primary-dark: 2, 132, 199;
-  /* sky-600 */
+  --primary: 99, 102, 241;
+  /* indigo-500 */
+  --primary-dark: 79, 70, 229;
+  /* indigo-600 */
   --secondary: 15, 23, 42;
   /* slate-900 */
   --accent: 16, 185, 129;
@@ -33,7 +33,7 @@
   }
 
   body {
-    @apply bg-slate-50 text-slate-900 selection:bg-sky-100 selection:text-sky-900;
+    @apply bg-slate-50 text-slate-900 selection:bg-indigo-100 selection:text-indigo-900;
   }
 }
 
@@ -43,7 +43,7 @@
   }
 
   .btn-primary {
-    @apply relative inline-flex items-center justify-center px-8 py-3.5 font-semibold text-white transition-all duration-300 bg-sky-600 rounded-2xl hover:bg-sky-700 hover:shadow-lg hover:shadow-sky-200 active:scale-95 overflow-hidden;
+    @apply relative inline-flex items-center justify-center px-8 py-3.5 font-semibold text-white transition-all duration-300 bg-indigo-600 rounded-2xl hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-200 active:scale-95 overflow-hidden;
   }
 
   .btn-secondary {
@@ -51,7 +51,7 @@
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-indigo-600 font-bold;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600 font-bold;
   }
 
   .section-padding {

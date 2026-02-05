@@ -23,8 +23,8 @@ const servicesData = {
         tagline: 'Comprehensive care for your family\'s oral health.',
         miniDesc: 'Maintaining your natural smile through preventive care and expert diagnostics.',
         icon: <Stethoscope size={48} />,
-        color: 'text-blue-600',
-        bg: 'bg-blue-50',
+        color: 'text-indigo-600',
+        bg: 'bg-indigo-50',
         image: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=800',
         description: 'Our general dentistry services are the foundation of a healthy smile. We focus on preventive care, early detection, and personalized treatment plans to ensure long-term oral health for patients of all ages. Regular check-ups are essential for catching issues before they become painful and expensive.',
         process: [
@@ -69,8 +69,8 @@ const servicesData = {
         tagline: 'Precision analysis powered by modern intelligence.',
         miniDesc: 'Using neural networks to find issues 40% faster than the human eye.',
         icon: <Shield size={48} />,
-        color: 'text-sky-600',
-        bg: 'bg-sky-50',
+        color: 'text-indigo-600',
+        bg: 'bg-indigo-50',
         image: 'https://images.unsplash.com/photo-1576091160550-217359f42f8c?auto=format&fit=crop&q=80&w=800',
         description: 'We leverage cutting-edge artificial intelligence to analyze dental scans with unprecedented accuracy. Our neural networks are trained on millions of clinical samples to detect decay, bone loss, and structural abnormalities long before they are visible to the human eye.',
         process: [
@@ -138,8 +138,8 @@ const servicesData = {
         tagline: 'Expert surgical procedures with a gentle touch.',
         miniDesc: 'High-precision surgical care with advanced comfort options.',
         icon: <Calendar size={48} />,
-        color: 'text-slate-600',
-        bg: 'bg-slate-50',
+        color: 'text-violet-600',
+        bg: 'bg-violet-50',
         image: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&q=80&w=800',
         description: 'Our surgical team specializes in precise, low-trauma procedures. We utilize advanced technology like guided surgical stents to ensure faster healing and minimal discomfort. We prioritize your comfort with multiple sedation options tailored to your anxiety level.',
         process: [
@@ -173,7 +173,7 @@ function ServiceDetailPage() {
             <div className="min-h-screen flex items-center justify-center p-6 text-center">
                 <div>
                     <h1 className="text-4xl font-black mb-4">Service Not Found</h1>
-                    <Link to="/" className="text-sky-600 font-bold hover:underline">Return to Home</Link>
+                    <Link to="/" className="text-indigo-600 font-bold hover:underline">Return to Home</Link>
                 </div>
             </div>
         );
@@ -189,7 +189,7 @@ function ServiceDetailPage() {
                         Back
                     </button>
                     <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-sky-600 rounded-lg flex items-center justify-center text-white">
+                        <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
                             <Stethoscope size={20} />
                         </div>
                         <span className="font-bold tracking-tight">SmileCare</span>
@@ -218,7 +218,7 @@ function ServiceDetailPage() {
                             <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-6 leading-tight">
                                 {service.title}
                             </h1>
-                            <p className="text-2xl font-bold text-sky-600 mb-8 leading-relaxed">
+                            <p className="text-2xl font-bold text-indigo-600 mb-8 leading-relaxed">
                                 {service.tagline}
                             </p>
                             <p className="text-lg text-slate-600 leading-relaxed mb-10 max-w-xl">
@@ -246,7 +246,7 @@ function ServiceDetailPage() {
                             transition={{ duration: 0.5, delay: 0.2 }}
                             className="relative"
                         >
-                            <div className="absolute -inset-4 bg-gradient-to-tr from-sky-200 to-indigo-200 blur-3xl opacity-20 -z-10 rounded-[40px]" />
+                            <div className="absolute -inset-4 bg-gradient-to-tr from-indigo-200 to-violet-200 blur-3xl opacity-20 -z-10 rounded-[40px]" />
                             <div className="glass-card rounded-[40px] p-2 aspect-square overflow-hidden shadow-2xl">
                                 <img
                                     src={service.image}
@@ -261,7 +261,7 @@ function ServiceDetailPage() {
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
                         {service.features.map((feature, i) => (
                             <div key={i} className="p-8 rounded-[40px] bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300">
-                                <div className="w-12 h-12 bg-sky-50 rounded-2xl flex items-center justify-center text-sky-600 mb-6">
+                                <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 mb-6">
                                     <CheckCircle2 size={24} />
                                 </div>
                                 <h3 className="text-lg font-bold text-slate-900 mb-3">{feature.title}</h3>
@@ -275,7 +275,7 @@ function ServiceDetailPage() {
                         <div className="space-y-16">
                             <section>
                                 <h2 className="text-3xl font-black text-slate-900 mb-10 flex items-center gap-3">
-                                    <div className="w-10 h-10 bg-sky-100 rounded-xl flex items-center justify-center text-sky-600">
+                                    <div className="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600">
                                         <Clock size={24} />
                                     </div>
                                     Clinical Process
@@ -295,7 +295,7 @@ function ServiceDetailPage() {
 
                             <section>
                                 <h2 className="text-3xl font-black text-slate-900 mb-8 flex items-center gap-3">
-                                    <ShieldCheck className="text-sky-600" />
+                                    <ShieldCheck className="text-indigo-600" />
                                     Why choose our {service.title}?
                                 </h2>
                                 <div className="grid sm:grid-cols-2 gap-4">
@@ -315,7 +315,7 @@ function ServiceDetailPage() {
                                 </h2>
                                 <div className="space-y-6">
                                     {[1, 2].map((i) => (
-                                        <div key={i} className="p-8 rounded-[40px] bg-sky-600 text-white relative overflow-hidden">
+                                        <div key={i} className="p-8 rounded-[40px] bg-indigo-600 text-white relative overflow-hidden">
                                             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
                                             <div className="flex gap-1 mb-6">
                                                 {[1, 2, 3, 4, 5].map(s => <Star key={s} size={16} fill="white" />)}
@@ -340,10 +340,10 @@ function ServiceDetailPage() {
 
                         <aside className="sticky top-32">
                             <div className="p-10 rounded-[40px] bg-slate-900 text-white relative overflow-hidden shadow-2xl">
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-sky-500/20 rounded-full blur-[100px]" />
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-[100px]" />
                                 <div className="relative z-10">
                                     <div className="flex items-center gap-3 mb-8">
-                                        <div className="w-12 h-12 bg-sky-600 rounded-2xl flex items-center justify-center">
+                                        <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center">
                                             <Clock size={24} />
                                         </div>
                                         <div>
@@ -356,7 +356,7 @@ function ServiceDetailPage() {
                                     </p>
                                     <button
                                         onClick={() => setChatOpen(true)}
-                                        className="w-full bg-white text-slate-900 py-5 rounded-3xl font-black hover:bg-sky-50 transition-all active:scale-95 mb-4 shadow-xl shadow-black/20"
+                                        className="w-full bg-white text-slate-900 py-5 rounded-3xl font-black hover:bg-indigo-50 transition-all active:scale-95 mb-4 shadow-xl shadow-black/20"
                                     >
                                         Start AI Booking
                                     </button>
@@ -393,15 +393,15 @@ function ServiceDetailPage() {
                 <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
                     <div>
                         <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                            <Stethoscope size={20} className="text-sky-600" />
+                            <Stethoscope size={20} className="text-indigo-600" />
                             <span className="font-black">SmileCare</span>
                         </div>
                         <p className="text-sm text-slate-500 font-medium">© 2026 SmileCare Dental Studio. Professional AI-powered dentistry.</p>
                     </div>
                     <div className="flex gap-10">
-                        <Link to="/" className="text-sm font-bold text-slate-600 hover:text-sky-600 transition-colors">Home</Link>
-                        <a href="#" className="text-sm font-bold text-slate-600 hover:text-sky-600 transition-colors">Privacy</a>
-                        <a href="#" className="text-sm font-bold text-slate-600 hover:text-sky-600 transition-colors">Terms</a>
+                        <Link to="/" className="text-sm font-bold text-slate-600 hover:text-indigo-600 transition-colors">Home</Link>
+                        <a href="#" className="text-sm font-bold text-slate-600 hover:text-indigo-600 transition-colors">Privacy</a>
+                        <a href="#" className="text-sm font-bold text-slate-600 hover:text-indigo-600 transition-colors">Terms</a>
                     </div>
                 </div>
             </footer>

@@ -50,7 +50,7 @@ function LandingPage() {
     }, []);
 
     return (
-        <div className="min-h-screen font-sans selection:bg-sky-100 selection:text-sky-900">
+        <div className="min-h-screen font-sans selection:bg-indigo-100 selection:text-indigo-900">
             {/* Navigation */}
             <nav
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-slate-200 py-4' : 'bg-transparent py-6'
@@ -58,12 +58,12 @@ function LandingPage() {
             >
                 <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                     <div className="flex items-center gap-2 group cursor-pointer">
-                        <div className="w-10 h-10 bg-sky-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-sky-200 group-hover:scale-110 transition-transform">
+                        <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200 group-hover:scale-110 transition-transform">
                             <Stethoscope size={24} />
                         </div>
                         <div>
                             <span className="text-xl font-extrabold tracking-tight text-slate-900">SmileCare</span>
-                            <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-sky-600 -mt-1">DENTAL STUDIO</span>
+                            <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-indigo-600 -mt-1">DENTAL STUDIO</span>
                         </div>
                     </div>
 
@@ -72,13 +72,13 @@ function LandingPage() {
                             <a
                                 key={item}
                                 href={`#${item.toLowerCase()}`}
-                                className="text-sm font-semibold text-slate-600 hover:text-sky-600 transition-colors"
+                                className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
                             >
                                 {item}
                             </a>
                         ))}
                         <div className="h-6 w-px bg-slate-200" />
-                        <Link to="/login" className="text-sm font-semibold text-slate-600 hover:text-sky-600 transition-colors">
+                        <Link to="/login" className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">
                             Admin
                         </Link>
                         <button
@@ -105,7 +105,7 @@ function LandingPage() {
                     >
                         <div className="flex justify-between items-center mb-12">
                             <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 bg-sky-600 rounded-lg flex items-center justify-center text-white">
+                                <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
                                     <Stethoscope size={20} />
                                 </div>
                                 <span className="text-lg font-bold">SmileCare</span>
@@ -129,7 +129,7 @@ function LandingPage() {
                             <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="text-xl font-bold text-slate-900">Admin</Link>
                             <button
                                 onClick={() => { setChatOpen(true); setMobileMenuOpen(false); }}
-                                className="w-full bg-sky-600 text-white py-4 rounded-2xl font-bold"
+                                className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold"
                             >
                                 Book Now
                             </button>
@@ -140,7 +140,7 @@ function LandingPage() {
 
             {/* Hero Section */}
             <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-b from-sky-50/50 to-transparent rounded-full blur-3xl -z-10" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-b from-indigo-50/50 to-transparent rounded-full blur-3xl -z-10" />
 
                 <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
                     <motion.div
@@ -148,10 +148,10 @@ function LandingPage() {
                         animate="animate"
                         variants={staggerContainer}
                     >
-                        <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-50 border border-sky-100 text-sky-700 text-xs font-bold mb-6">
+                        <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold mb-6">
                             <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
                             </span>
                             AI-POWERED DENTAL CARE
                         </motion.div>
@@ -200,7 +200,7 @@ function LandingPage() {
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className="relative"
                     >
-                        <div className="absolute -inset-4 bg-gradient-to-tr from-sky-200 to-indigo-200 blur-2xl opacity-30 -z-10 rounded-[40px]" />
+                        <div className="absolute -inset-4 bg-gradient-to-tr from-indigo-200 to-violet-200 blur-2xl opacity-30 -z-10 rounded-[40px]" />
                         <div className="glass-card rounded-[40px] p-2 aspect-[4/5] lg:aspect-square overflow-hidden">
                             <div className="w-full h-full rounded-[34px] bg-slate-900 relative overflow-hidden group">
                                 {/* Dashboard UI Simulation */}
@@ -219,10 +219,10 @@ function LandingPage() {
                                     <div className="space-y-6">
                                         <div className="h-12 w-3/4 rounded-2xl bg-white/10 animate-pulse" />
                                         <div className="grid grid-cols-2 gap-4">
-                                            <div className="h-32 rounded-3xl bg-sky-500/20 border border-sky-500/30 p-4">
-                                                <Users className="text-sky-400 mb-2" size={24} />
+                                            <div className="h-32 rounded-3xl bg-indigo-500/20 border border-indigo-500/30 p-4">
+                                                <Users className="text-indigo-400 mb-2" size={24} />
                                                 <div className="text-2xl font-bold text-white">42</div>
-                                                <div className="text-[10px] text-sky-300 font-bold uppercase">Today's Patients</div>
+                                                <div className="text-[10px] text-indigo-300 font-bold uppercase">Today's Patients</div>
                                             </div>
                                             <div className="h-32 rounded-3xl bg-emerald-500/20 border border-emerald-500/30 p-4">
                                                 <Calendar className="text-emerald-400 mb-2" size={24} />
@@ -247,7 +247,7 @@ function LandingPage() {
                                 </div>
 
                                 {/* Image overlay for visual pop */}
-                                <div className="absolute inset-0 bg-sky-600/10 mix-blend-overlay" />
+                                <div className="absolute inset-0 bg-indigo-600/10 mix-blend-overlay" />
                             </div>
                         </div>
 
@@ -272,7 +272,7 @@ function LandingPage() {
                             className="absolute -left-12 bottom-1/4 glass-card p-5 rounded-3xl shadow-2xl"
                         >
                             <div className="flex items-center gap-2 mb-2">
-                                <MessageSquare className="text-sky-600" size={20} />
+                                <MessageSquare className="text-indigo-600" size={20} />
                                 <span className="text-xs font-extrabold text-slate-900">AI Support</span>
                             </div>
                             <p className="text-xs text-slate-600 max-w-[120px]">"I've found a slot at 4:30 PM today."</p>
@@ -297,8 +297,8 @@ function LandingPage() {
             <section id="services" className="py-24 bg-slate-50 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="text-center max-w-3xl mx-auto mb-20">
-                        <h2 className="text-sm font-bold text-sky-600 uppercase tracking-widest mb-4">Our Expertise</h2>
-                        <h3 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">Everything you need for a <span className="text-sky-600">perfect smile.</span></h3>
+                        <h2 className="text-sm font-bold text-indigo-600 uppercase tracking-widest mb-4">Our Expertise</h2>
+                        <h3 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">Everything you need for a <span className="text-indigo-600">perfect smile.</span></h3>
                         <p className="text-lg text-slate-600">We offer a wide range of services powered by the latest dental technology and a patient-first approach.</p>
                     </div>
 
@@ -309,7 +309,7 @@ function LandingPage() {
                                 title: 'General Dentistry',
                                 desc: 'Comprehensive exams, cleanings, and preventive care for the whole family.',
                                 icon: <Stethoscope size={32} />,
-                                color: 'bg-blue-50 text-blue-600'
+                                color: 'bg-indigo-50 text-indigo-600'
                             },
                             {
                                 id: 'cosmetic-studio',
@@ -323,7 +323,7 @@ function LandingPage() {
                                 title: 'AI Diagnostics',
                                 desc: 'Precision imaging and AI-assisted analysis for faster, more accurate results.',
                                 icon: <Shield size={32} />,
-                                color: 'bg-sky-50 text-sky-600'
+                                color: 'bg-indigo-50 text-indigo-600'
                             },
                             {
                                 id: 'emergency-care',
@@ -350,7 +350,7 @@ function LandingPage() {
                             <motion.div
                                 key={i}
                                 whileHover={{ y: -10 }}
-                                className="group p-8 rounded-[40px] bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-sky-100/50 transition-all duration-300"
+                                className="group p-8 rounded-[40px] bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-100/50 transition-all duration-300"
                             >
                                 <div className={`w-16 h-16 rounded-3xl ${service.color} flex items-center justify-center mb-8 group-hover:scale-110 transition-transform`}>
                                     {service.icon}
@@ -382,18 +382,18 @@ function LandingPage() {
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-20 items-center">
                         <div>
-                            <h2 className="text-sm font-bold text-sky-600 uppercase tracking-widest mb-4">Precision Technology</h2>
-                            <h3 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-8 tracking-tight">The intersection of <span className="text-sky-600">AI and medicine.</span></h3>
+                            <h2 className="text-sm font-bold text-indigo-600 uppercase tracking-widest mb-4">Precision Technology</h2>
+                            <h3 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-8 tracking-tight">The intersection of <span className="text-indigo-600">AI and medicine.</span></h3>
                             <p className="text-lg text-slate-600 mb-10 leading-relaxed">We've pioneered a patient-first workflow that leverages artificial intelligence to predict outcomes, minimize pain, and automate the tedious parts of healthcare.</p>
 
                             <div className="space-y-6">
                                 {[
-                                    { title: 'AI Diagnostics', desc: 'Neural networks detect issues 40% faster than traditional methods.', icon: <Sparkles className="text-sky-600" /> },
-                                    { title: 'Digital Scanning', desc: 'No more messy molds. 3D intraoral scans in under 60 seconds.', icon: <CheckCircle2 className="text-sky-600" /> },
-                                    { title: 'Guided Surgeries', desc: 'Robotic precision for dental implants and restorative work.', icon: <Shield className="text-sky-600" /> }
+                                    { title: 'AI Diagnostics', desc: 'Neural networks detect issues 40% faster than traditional methods.', icon: <Sparkles className="text-indigo-600" /> },
+                                    { title: 'Digital Scanning', desc: 'No more messy molds. 3D intraoral scans in under 60 seconds.', icon: <CheckCircle2 className="text-indigo-600" /> },
+                                    { title: 'Guided Surgeries', desc: 'Robotic precision for dental implants and restorative work.', icon: <Shield className="text-indigo-600" /> }
                                 ].map((item, i) => (
                                     <div key={i} className="flex gap-4 p-4 rounded-3xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
-                                        <div className="w-12 h-12 bg-sky-50 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                        <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center flex-shrink-0">
                                             {item.icon}
                                         </div>
                                         <div>
@@ -406,10 +406,10 @@ function LandingPage() {
                         </div>
 
                         <div className="relative">
-                            <div className="absolute -inset-10 bg-sky-100/50 rounded-full blur-[100px] animate-pulse" />
+                            <div className="absolute -inset-10 bg-indigo-100/50 rounded-full blur-[100px] animate-pulse" />
                             <div className="relative glass-card rounded-[40px] p-8 border border-slate-200">
                                 <div className="aspect-video bg-slate-900 rounded-[30px] overflow-hidden relative shadow-2xl">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-sky-500/20 to-indigo-500/20 mix-blend-overlay" />
+                                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-violet-500/20 mix-blend-overlay" />
                                     <div className="absolute inset-0 flex items-center justify-center">
                                         <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white cursor-pointer hover:scale-110 transition-transform">
                                             <Play fill="white" size={32} />
@@ -421,9 +421,9 @@ function LandingPage() {
                                     </div>
                                 </div>
                                 <div className="mt-8 grid grid-cols-2 gap-4">
-                                    <div className="p-4 bg-sky-50 rounded-2xl border border-sky-100">
-                                        <div className="text-2xl font-black text-sky-600">0.5mm</div>
-                                        <div className="text-[10px] font-bold text-sky-700 uppercase tracking-wider">Scanning Precision</div>
+                                    <div className="p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
+                                        <div className="text-2xl font-black text-indigo-600">0.5mm</div>
+                                        <div className="text-[10px] font-bold text-indigo-700 uppercase tracking-wider">Scanning Precision</div>
                                     </div>
                                     <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
                                         <div className="text-2xl font-black text-emerald-600">60sec</div>
@@ -473,7 +473,7 @@ function LandingPage() {
                                 >
                                     <div>
                                         <div className="flex justify-between items-start mb-4">
-                                            <div className="px-3 py-1 rounded-full bg-white text-[10px] font-bold text-sky-600 uppercase border border-sky-100">
+                                            <div className="px-3 py-1 rounded-full bg-white text-[10px] font-bold text-indigo-600 uppercase border border-indigo-100">
                                                 {booking.service}
                                             </div>
                                             <div className="text-[10px] font-bold text-slate-400">ID: {String(booking.id || '').slice(0, 8)}</div>
@@ -486,7 +486,7 @@ function LandingPage() {
                                     </div>
                                     <div className="mt-6 pt-4 border-t border-slate-200/50 flex items-center justify-between">
                                         <div className="flex items-center gap-2 text-sm font-bold text-slate-900">
-                                            <Clock size={14} className="text-sky-600" />
+                                            <Clock size={14} className="text-indigo-600" />
                                             {booking.time}
                                         </div>
                                         <div className="text-[10px] font-bold text-emerald-600 flex items-center gap-1">
@@ -503,13 +503,13 @@ function LandingPage() {
 
             {/* Testimonials */}
             <section id="reviews" className="py-24 bg-slate-950 text-white overflow-hidden relative">
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-500/10 rounded-full blur-[120px]" />
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px]" />
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="grid lg:grid-cols-[1fr_1.5fr] gap-20 items-center">
                         <div>
-                            <h2 className="text-sm font-bold text-sky-400 uppercase tracking-widest mb-6">Patient Stories</h2>
-                            <h3 className="text-5xl font-extrabold mb-8 leading-tight">Loved by the <span className="text-sky-400">community.</span></h3>
+                            <h2 className="text-sm font-bold text-indigo-400 uppercase tracking-widest mb-6">Patient Stories</h2>
+                            <h3 className="text-5xl font-extrabold mb-8 leading-tight">Loved by the <span className="text-indigo-400">community.</span></h3>
                             <p className="text-slate-400 text-lg mb-10">We pride ourselves on providing exceptional care that leaves our patients smiling.</p>
 
                             <div className="flex gap-12">
@@ -558,7 +558,7 @@ function LandingPage() {
                                         </div>
                                         <div>
                                             <div className="font-bold">{t.name}</div>
-                                            <div className="text-[10px] text-sky-400 font-bold uppercase">{t.role}</div>
+                                            <div className="text-[10px] text-indigo-400 font-bold uppercase">{t.role}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -571,21 +571,21 @@ function LandingPage() {
             {/* CTA Section */}
             <section className="py-24 bg-white relative">
                 <div className="max-w-5xl mx-auto px-6">
-                    <div className="relative rounded-[60px] bg-sky-600 p-12 md:p-20 overflow-hidden text-center shadow-2xl shadow-sky-200">
+                    <div className="relative rounded-[60px] bg-indigo-600 p-12 md:p-20 overflow-hidden text-center shadow-2xl shadow-indigo-200">
                         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
                         <div className="relative z-10">
                             <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-8 tracking-tight">Ready for a better <br /> dental experience?</h2>
-                            <p className="text-sky-100 text-lg mb-12 max-w-2xl mx-auto">Join thousands of patients who have switched to a smarter way of caring for their smiles.</p>
+                            <p className="text-indigo-100 text-lg mb-12 max-w-2xl mx-auto">Join thousands of patients who have switched to a smarter way of caring for their smiles.</p>
                             <div className="flex flex-wrap justify-center gap-6">
                                 <button
                                     onClick={() => setChatOpen(true)}
-                                    className="px-10 py-5 bg-white text-sky-600 rounded-3xl font-extrabold hover:bg-sky-50 transition-all shadow-xl shadow-black/10 active:scale-95 text-lg"
+                                    className="px-10 py-5 bg-white text-indigo-600 rounded-3xl font-extrabold hover:bg-indigo-50 transition-all shadow-xl shadow-black/10 active:scale-95 text-lg"
                                 >
                                     Book Your Appointment
                                 </button>
                                 <a
                                     href="tel:5551234567"
-                                    className="w-full md:w-auto flex items-center justify-center gap-3 text-white font-bold hover:text-sky-100 transition-colors"
+                                    className="w-full md:w-auto flex items-center justify-center gap-3 text-white font-bold hover:text-indigo-100 transition-colors"
                                 >
                                     <Phone size={20} />
                                     <span>Or call (555) 123-4567</span>
@@ -602,7 +602,7 @@ function LandingPage() {
                     <div className="grid md:grid-cols-4 gap-12 mb-20">
                         <div className="col-span-2">
                             <div className="flex items-center gap-2 mb-8">
-                                <div className="w-10 h-10 bg-sky-600 rounded-xl flex items-center justify-center text-white">
+                                <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white">
                                     <Stethoscope size={24} />
                                 </div>
                                 <span className="text-2xl font-black text-slate-900 tracking-tight">SmileCare</span>
@@ -612,7 +612,7 @@ function LandingPage() {
                             </p>
                             <div className="flex gap-4">
                                 {[1, 2, 3, 4].map((i) => (
-                                    <div key={i} className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-sky-600 hover:border-sky-600 transition-colors cursor-pointer">
+                                    <div key={i} className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:border-indigo-600 transition-colors cursor-pointer">
                                         <Sparkles size={18} />
                                     </div>
                                 ))}
@@ -624,7 +624,7 @@ function LandingPage() {
                             <ul className="space-y-4">
                                 {['About Us', 'Services', 'Our Team', 'AI Lab', 'Contact'].map((item) => (
                                     <li key={item}>
-                                        <a href="#" className="text-slate-500 hover:text-sky-600 font-bold text-sm transition-colors">{item}</a>
+                                        <a href="#" className="text-slate-500 hover:text-indigo-600 font-bold text-sm transition-colors">{item}</a>
                                     </li>
                                 ))}
                             </ul>
@@ -634,12 +634,12 @@ function LandingPage() {
                             <h4 className="font-bold text-slate-900 mb-8 uppercase tracking-widest text-xs">Contact</h4>
                             <ul className="space-y-6">
                                 <li className="flex gap-4">
-                                    <div className="w-10 h-10 rounded-full bg-sky-50 flex-shrink-0 flex items-center justify-center text-sky-600">
+                                    <div className="w-10 h-10 rounded-full bg-indigo-50 flex-shrink-0 flex items-center justify-center text-indigo-600">
                                         <Phone size={18} />
                                     </div>
                                     <div>
                                         <div className="text-[10px] font-bold text-slate-400 uppercase">Support</div>
-                                        <a href="tel:5551234567" className="text-sm font-bold text-slate-900 hover:text-sky-600 transition-colors">(555) 123-4567</a>
+                                        <a href="tel:5551234567" className="text-sm font-bold text-slate-900 hover:text-indigo-600 transition-colors">(555) 123-4567</a>
                                     </div>
                                 </li>
                                 <li className="flex gap-4">
@@ -648,7 +648,7 @@ function LandingPage() {
                                     </div>
                                     <div>
                                         <div className="text-[10px] font-bold text-slate-400 uppercase">Email</div>
-                                        <a href="mailto:hello@smilecare.ai" className="text-sm font-bold text-slate-900 hover:text-sky-600 transition-colors">hello@smilecare.ai</a>
+                                        <a href="mailto:hello@smilecare.ai" className="text-sm font-bold text-slate-900 hover:text-indigo-600 transition-colors">hello@smilecare.ai</a>
                                     </div>
                                 </li>
                             </ul>

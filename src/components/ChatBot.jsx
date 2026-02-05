@@ -49,7 +49,7 @@ function ChatBot({ isOpen, onClose }) {
             setBookingStep(2);
         } else if (bookingStep === 2) {
             setBookingData({ ...bookingData, name: inputMessage });
-            botResponse.text = `Nice to meet you, **${inputMessage}**! When would you like to visit us? (Any date works for me!)`;
+            botResponse.text = `Nice to meet you, **${inputMessage}**! When would you like to visit us? (Please use YYYY-MM-DD format for best results)`;
             setBookingStep(3);
         } else if (bookingStep === 3) {
             setBookingData({ ...bookingData, date: inputMessage });
@@ -91,9 +91,9 @@ function ChatBot({ isOpen, onClose }) {
                 >
                     {/* Header */}
                     <div className="bg-slate-950 p-6 text-white flex items-center justify-between relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-sky-500/20 rounded-full blur-2xl pointer-events-none" />
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-2xl pointer-events-none" />
                         <div className="flex items-center gap-4 relative z-10">
-                            <div className="w-12 h-12 bg-sky-600 rounded-2xl flex items-center justify-center shadow-lg shadow-sky-500/20">
+                            <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
                                 <Bot size={24} />
                             </div>
                             <div>
@@ -123,12 +123,12 @@ function ChatBot({ isOpen, onClose }) {
                                 className={`flex ${msg.type === 'bot' ? 'justify-start' : 'justify-end'}`}
                             >
                                 <div className={`flex gap-3 max-w-[85%] ${msg.type === 'bot' ? 'flex-row' : 'flex-row-reverse'}`}>
-                                    <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center ${msg.type === 'bot' ? 'bg-sky-100 text-sky-600' : 'bg-slate-900 text-white'}`}>
+                                    <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center ${msg.type === 'bot' ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-900 text-white'}`}>
                                         {msg.type === 'bot' ? <Sparkles size={14} /> : <User size={14} />}
                                     </div>
                                     <div className={`p-4 rounded-[24px] text-sm leading-relaxed shadow-sm ${msg.type === 'bot'
                                         ? 'bg-white text-slate-700'
-                                        : 'bg-sky-600 text-white'
+                                        : 'bg-indigo-600 text-white'
                                         }`}>
                                         {msg.text}
                                     </div>
@@ -147,12 +147,12 @@ function ChatBot({ isOpen, onClose }) {
                                 onChange={(e) => setInputMessage(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                                 placeholder="Type your message..."
-                                className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 pl-6 pr-14 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all"
+                                className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 pl-6 pr-14 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all"
                             />
                             <button
                                 onClick={handleSendMessage}
                                 disabled={!inputMessage.trim()}
-                                className="absolute right-2 top-2 w-10 h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center hover:bg-sky-600 transition-colors disabled:opacity-50"
+                                className="absolute right-2 top-2 w-10 h-10 bg-slate-950 text-white rounded-xl flex items-center justify-center hover:bg-indigo-600 transition-colors disabled:opacity-50"
                             >
                                 <Send size={18} />
                             </button>

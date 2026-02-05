@@ -22,7 +22,9 @@ import {
     ExternalLink,
     Trash2,
     Sparkles,
-    ArrowRight
+    ArrowRight,
+    X,
+    ShieldCheck
 } from 'lucide-react';
 import {
     format,
@@ -44,6 +46,7 @@ function Dashboard() {
     const [viewMode, setViewMode] = useState('calendar');
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [activeTab, setActiveTab] = useState('Overview');
+    const [selectedPatient, setSelectedPatient] = useState(null);
 
     useEffect(() => {
         const auth = localStorage.getItem('smilecare_auth');
@@ -73,10 +76,42 @@ function Dashboard() {
         >
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                    { label: 'Total Bookings', value: bookings.length, icon: <CalendarIcon size={24} />, color: 'bg-blue-50 text-blue-600' },
-                    { label: 'Confirmed Today', value: bookings.filter(b => isSameDay(new Date(b.date), new Date())).length, icon: <CheckCircle2 size={24} />, color: 'bg-emerald-50 text-emerald-600' },
-                    { label: 'Total Patients', value: new Set(bookings.map(b => b.name)).size, icon: <Users size={24} />, color: 'bg-sky-50 text-sky-600' },
-                    { label: 'AI Responses', value: '48', icon: <Sparkles size={24} />, color: 'bg-indigo-50 text-indigo-600' },
+                    { label: 'Total Bookings', value: bookings.length, icon: <CalendarIcon size={24} />, color: 'bg-indigo-50 text-indigo-600' },
+                    {
+                        label: 'Confirmed Today',
+                        value: bookings.filter(b => {
+                            try {
+                                if (!b.date) return false;
+                                let bookingDate;
+                                const dateStr = String(b.date).trim();
+
+                                if (dateStr.includes('-') && dateStr.split('-').length === 3) {
+                                    const [y, m, d] = dateStr.split('-').map(Number);
+                                    bookingDate = new Date(y, m - 1, d);
+                                } else {
+                                    bookingDate = new Date(dateStr);
+                                }
+
+                                if (isNaN(bookingDate.getTime())) {
+                                    const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+                                    const match = dateStr.match(/(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+(\d+)/i);
+                                    if (match) {
+                                        const monthIdx = months.indexOf(match[1].toLowerCase().substring(0, 3));
+                                        const dayNum = parseInt(match[2]);
+                                        bookingDate = new Date(new Date().getFullYear(), monthIdx, dayNum);
+                                    }
+                                }
+
+                                return isSameDay(bookingDate, new Date());
+                            } catch (e) {
+                                return false;
+                            }
+                        }).length,
+                        icon: <CheckCircle2 size={24} />,
+                        color: 'bg-emerald-50 text-emerald-600'
+                    },
+                    { label: 'Total Patients', value: new Set(bookings.map(b => b.name)).size, icon: <Users size={24} />, color: 'bg-violet-50 text-violet-600' },
+                    { label: 'AI Responses', value: '48', icon: <Sparkles size={24} />, color: 'bg-amber-50 text-amber-600' },
                 ].map((stat) => (
                     <div key={stat.label} className="bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm flex items-center justify-between group hover:shadow-lg hover:shadow-slate-100 transition-all duration-300">
                         <div>
@@ -95,18 +130,18 @@ function Dashboard() {
                             <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">Recent Activity</h3>
                             <p className="text-sm text-slate-400 font-medium">Real-time AI booking stream</p>
                         </div>
-                        <button onClick={() => setActiveTab('Appointments')} className="text-xs font-bold text-sky-600 flex items-center gap-1">View Schedule <ChevronRight size={14} /></button>
+                        <button onClick={() => setActiveTab('Appointments')} className="text-xs font-bold text-indigo-600 flex items-center gap-1">View Schedule <ChevronRight size={14} /></button>
                     </div>
                     <div className="space-y-6">
                         {bookings.length === 0 ? (
                             <p className="text-slate-400 text-sm font-medium italic p-10 text-center bg-slate-50 rounded-3xl border border-dashed border-slate-200">No activity recorded today.</p>
                         ) : bookings.slice(0, 4).map((b, i) => (
                             <div key={i} className="flex items-center gap-5 p-4 rounded-3xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
-                                <div className="h-12 w-12 rounded-2xl bg-sky-50 flex items-center justify-center text-sky-600">
+                                <div className="h-12 w-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600">
                                     <Clock size={20} />
                                 </div>
                                 <div className="flex-1">
-                                    <p className="text-sm font-bold text-slate-900">New reservation: <span className="text-sky-600">{b.service}</span></p>
+                                    <p className="text-sm font-bold text-slate-900">New reservation: <span className="text-indigo-600">{b.service}</span></p>
                                     <p className="text-xs text-slate-500 font-medium">Patient: {b.name} · {b.date}</p>
                                 </div>
                                 <div className="flex items-center gap-5">
@@ -124,10 +159,10 @@ function Dashboard() {
                 </div>
 
                 <div className="bg-slate-950 p-8 rounded-[40px] text-white shadow-2xl shadow-slate-200 flex flex-col justify-between relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-sky-500/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
                     <div className="relative z-10">
                         <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-8 border border-white/10">
-                            <TrendingUp size={28} className="text-sky-400" />
+                            <TrendingUp size={28} className="text-indigo-400" />
                         </div>
                         <h3 className="text-2xl font-extrabold tracking-tight">Clinic Growth</h3>
                         <p className="mt-4 text-slate-400 text-sm leading-relaxed font-medium">
@@ -175,7 +210,7 @@ function Dashboard() {
                     <div className="flex items-center gap-3">
                         <div className="relative">
                             <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
-                            <input type="text" placeholder="Search patients..." className="bg-slate-50 border border-slate-100 rounded-full py-2.5 pl-10 pr-6 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/10 focus:border-sky-500 w-64" />
+                            <input type="text" placeholder="Search patients..." className="bg-slate-50 border border-slate-100 rounded-full py-2.5 pl-10 pr-6 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500 w-64" />
                         </div>
                     </div>
                 </div>
@@ -195,7 +230,7 @@ function Dashboard() {
                                 <tr key={i} className="hover:bg-slate-50/70 transition group">
                                     <td className="px-10 py-6">
                                         <div className="flex items-center gap-4">
-                                            <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-500 group-hover:bg-sky-50 group-hover:text-sky-600 transition-colors">
+                                            <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-500 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
                                                 {p.name.charAt(0)}
                                             </div>
                                             <span className="font-extrabold text-slate-900">{p.name}</span>
@@ -204,10 +239,15 @@ function Dashboard() {
                                     <td className="px-10 py-6"><span className="bg-slate-100 px-3 py-1 rounded-lg text-xs font-bold text-slate-600">{p.totalVisits} sess.</span></td>
                                     <td className="px-10 py-6 text-slate-500 font-medium">{p.lastVisit}</td>
                                     <td className="px-10 py-6">
-                                        <span className="px-3 py-1 rounded-full bg-sky-50 text-sky-600 text-[10px] font-bold uppercase tracking-wider">{p.service}</span>
+                                        <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-wider">{p.service}</span>
                                     </td>
                                     <td className="px-10 py-6">
-                                        <button className="text-sky-600 font-black text-xs hover:underline flex items-center gap-1">Details <ExternalLink size={12} /></button>
+                                        <button
+                                            onClick={() => setSelectedPatient(p)}
+                                            className="text-indigo-600 font-black text-xs hover:underline flex items-center gap-1 cursor-pointer"
+                                        >
+                                            Details <ExternalLink size={12} />
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
@@ -227,7 +267,7 @@ function Dashboard() {
                         <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">AI Communication Hub</h3>
                         <p className="text-sm text-slate-400 font-medium">Real-time patient chat logs</p>
                     </div>
-                    <span className="bg-sky-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">{messages.length} Active</span>
+                    <span className="bg-indigo-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">{messages.length} Active</span>
                 </div>
                 {messages.length === 0 ? (
                     <div className="bg-white p-24 rounded-[40px] border border-dashed border-slate-200 text-center">
@@ -245,10 +285,10 @@ function Dashboard() {
                                 key={msg.id}
                                 className="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-lg transition-all group relative overflow-hidden"
                             >
-                                <div className="absolute top-0 left-0 w-1 h-full bg-sky-500" />
+                                <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
                                 <div className="flex justify-between items-start mb-6">
                                     <div className="flex items-center gap-3">
-                                        <div className="h-10 w-10 rounded-xl bg-sky-50 flex items-center justify-center text-sky-600">
+                                        <div className="h-10 w-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
                                             <Sparkles size={20} />
                                         </div>
                                         <div>
@@ -257,7 +297,7 @@ function Dashboard() {
                                         </div>
                                     </div>
                                     <div className="flex gap-2">
-                                        <button className="p-2 bg-slate-50 text-slate-400 rounded-lg hover:text-sky-600 hover:bg-sky-50 transition-colors"><Bell size={16} /></button>
+                                        <button className="p-2 bg-slate-50 text-slate-400 rounded-lg hover:text-indigo-600 hover:bg-indigo-50 transition-colors"><Bell size={16} /></button>
                                     </div>
                                 </div>
                                 <p className="text-base text-slate-700 leading-relaxed font-semibold italic">"{msg.text}"</p>
@@ -277,7 +317,7 @@ function Dashboard() {
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl space-y-8">
             <div className="bg-white p-10 rounded-[40px] border border-slate-100 shadow-sm shadow-slate-100">
                 <div className="flex items-center gap-4 mb-10">
-                    <div className="w-12 h-12 bg-sky-50 rounded-2xl flex items-center justify-center text-sky-600">
+                    <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600">
                         <Stethoscope size={24} />
                     </div>
                     <div>
@@ -289,15 +329,15 @@ function Dashboard() {
                     <div className="grid md:grid-cols-2 gap-6">
                         <div className="col-span-2">
                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1 mb-2 block">Enterprise Name</label>
-                            <input type="text" defaultValue="SmileCare Dental Studio" className="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-sky-500/10 focus:border-sky-500 transition-all" />
+                            <input type="text" defaultValue="SmileCare Dental Studio" className="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all" />
                         </div>
                         <div>
                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1 mb-2 block">Opening Cycle</label>
-                            <input type="text" defaultValue="08:30 AM" className="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-sky-500/10 focus:border-sky-500 transition-all" />
+                            <input type="text" defaultValue="08:30 AM" className="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all" />
                         </div>
                         <div>
                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1 mb-2 block">Closing Cycle</label>
-                            <input type="text" defaultValue="07:00 PM" className="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-sky-500/10 focus:border-sky-500 transition-all" />
+                            <input type="text" defaultValue="07:00 PM" className="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all" />
                         </div>
                     </div>
                     <button className="bg-slate-950 text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-slate-800 shadow-lg shadow-slate-200 transition-all">Update Profiles</button>
@@ -344,13 +384,43 @@ function Dashboard() {
                 <div className="grid grid-cols-7">
                     {calendarDays.map((day, idx) => {
                         const localBookings = bookings.filter(b => {
-                            try { return isSameDay(new Date(b.date), day); } catch (e) { return false; }
+                            try {
+                                if (!b.date) return false;
+
+                                let bookingDate;
+                                const dateStr = String(b.date).trim();
+
+                                // 1. Handle YYYY-MM-DD (prevents timezone shifts)
+                                if (dateStr.includes('-') && dateStr.split('-').length === 3) {
+                                    const [y, m, d] = dateStr.split('-').map(Number);
+                                    bookingDate = new Date(y, m - 1, d);
+                                } else {
+                                    bookingDate = new Date(dateStr);
+                                }
+
+                                // 2. Fallback for natural language like "Feb 6 this week"
+                                if (isNaN(bookingDate.getTime())) {
+                                    const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+                                    const match = dateStr.match(/(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+(\d+)/i);
+
+                                    if (match) {
+                                        const monthIdx = months.indexOf(match[1].toLowerCase().substring(0, 3));
+                                        const dayNum = parseInt(match[2]);
+                                        bookingDate = new Date(new Date().getFullYear(), monthIdx, dayNum);
+                                    }
+                                }
+
+                                if (isNaN(bookingDate.getTime())) return false;
+                                return isSameDay(bookingDate, day);
+                            } catch (e) {
+                                return false;
+                            }
                         });
 
                         return (
                             <div key={idx} className={`min-h-[140px] p-4 border-r border-b border-slate-50 transition-colors ${!isSameMonth(day, monthStart) ? 'bg-slate-50/20 opacity-40' : 'bg-white hover:bg-slate-50/50'}`}>
                                 <div className="flex justify-between items-start mb-3">
-                                    <span className={`text-xs font-black tracking-tight ${isSameDay(day, new Date()) ? 'bg-sky-600 text-white w-7 h-7 flex items-center justify-center rounded-xl shadow-lg shadow-sky-200' : 'text-slate-400'}`}>
+                                    <span className={`text-xs font-black tracking-tight ${isSameDay(day, new Date()) ? 'bg-indigo-600 text-white w-7 h-7 flex items-center justify-center rounded-xl shadow-lg shadow-indigo-200' : 'text-slate-400'}`}>
                                         {format(day, 'd')}
                                     </span>
                                 </div>
@@ -358,14 +428,14 @@ function Dashboard() {
                                     {localBookings.map(b => (
                                         <div
                                             key={b.id}
-                                            className="px-2.5 py-2 text-[9px] bg-sky-50 text-sky-700 rounded-xl border border-sky-100 font-black uppercase tracking-wider leading-none group relative overflow-hidden"
+                                            className="px-2.5 py-2 text-[9px] bg-indigo-50 text-indigo-700 rounded-xl border border-indigo-100 font-black uppercase tracking-wider leading-none group relative overflow-hidden"
                                             title={`${b.service} - ${b.name}`}
                                         >
                                             <div className="flex flex-col gap-1 relative z-10">
                                                 <span>{b.name}</span>
                                                 <span className="text-[8px] opacity-60 font-bold">{b.time}</span>
                                             </div>
-                                            <div className="absolute top-0 right-0 w-1 h-full bg-sky-500" />
+                                            <div className="absolute top-0 right-0 w-1 h-full bg-indigo-500" />
                                         </div>
                                     ))}
                                 </div>
@@ -377,18 +447,103 @@ function Dashboard() {
         );
     };
 
+    const renderPatientModal = () => {
+        if (!selectedPatient) return null;
+        const patientBookings = bookings.filter(b => (b.name || 'Unknown') === selectedPatient.name);
+
+        return (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-sm">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    className="bg-white rounded-[40px] w-full max-w-2xl overflow-hidden shadow-2xl"
+                >
+                    <div className="p-8 border-b border-slate-50 flex items-center justify-between bg-white sticky top-0 z-10">
+                        <div className="flex items-center gap-4">
+                            <div className="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 font-black text-xl">
+                                {selectedPatient.name.charAt(0)}
+                            </div>
+                            <div>
+                                <h3 className="text-2xl font-black text-slate-900 tracking-tight">{selectedPatient.name}</h3>
+                                <p className="text-sm text-slate-400 font-bold uppercase tracking-widest">Medical History</p>
+                            </div>
+                        </div>
+                        <button
+                            onClick={() => setSelectedPatient(null)}
+                            className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-slate-950 transition-colors"
+                        >
+                            <X size={24} />
+                        </button>
+                    </div>
+
+                    <div className="p-8 max-h-[60vh] overflow-y-auto space-y-8">
+                        <div>
+                            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-4">Quick Stats</h4>
+                            <div className="grid grid-cols-3 gap-4">
+                                <div className="p-4 rounded-3xl bg-slate-50 border border-slate-100">
+                                    <div className="text-xl font-black text-slate-900">{selectedPatient.totalVisits}</div>
+                                    <div className="text-[10px] font-bold text-slate-400 uppercase">Total Sessions</div>
+                                </div>
+                                <div className="p-4 rounded-3xl bg-indigo-50 border border-indigo-100">
+                                    <div className="text-xl font-black text-indigo-600">{selectedPatient.service}</div>
+                                    <div className="text-[10px] font-bold text-indigo-600 uppercase">Primary Goal</div>
+                                </div>
+                                <div className="p-4 rounded-3xl bg-emerald-50 border border-emerald-100">
+                                    <div className="text-xl font-black text-emerald-600">Active</div>
+                                    <div className="text-[10px] font-bold text-emerald-600 uppercase">Status</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-4">Appointment History</h4>
+                            <div className="space-y-4">
+                                {patientBookings.map((b, i) => (
+                                    <div key={i} className="flex items-center justify-between p-5 rounded-3xl border border-slate-100 hover:border-indigo-100 transition-colors bg-white shadow-sm">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400">
+                                                <CalendarIcon size={18} />
+                                            </div>
+                                            <div>
+                                                <div className="font-bold text-slate-900">{b.date}</div>
+                                                <div className="text-xs text-slate-400">{b.service}</div>
+                                            </div>
+                                        </div>
+                                        <div className="text-right">
+                                            <div className="text-sm font-bold text-slate-900">{b.time}</div>
+                                            <div className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest">{b.status || 'Verified'}</div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="p-8 border-t border-slate-50 bg-slate-50/50 flex justify-end">
+                        <button
+                            onClick={() => setSelectedPatient(null)}
+                            className="px-12 py-4 rounded-2xl border border-slate-200 font-bold bg-white hover:bg-slate-50 transition-colors shadow-sm"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </motion.div>
+            </div>
+        );
+    };
+
     return (
         <div className="flex min-h-screen bg-slate-50 font-sans selection:bg-sky-100 selection:text-sky-900">
             {/* Sidebar */}
             <aside className="hidden w-72 flex-col bg-white border-r border-slate-100 lg:flex sticky top-0 h-screen">
                 <div className="p-8">
                     <div className="flex items-center gap-3 mb-10">
-                        <div className="w-10 h-10 bg-sky-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-sky-200">
+                        <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
                             <Stethoscope size={24} />
                         </div>
                         <div>
                             <span className="text-xl font-black text-slate-900 tracking-tight block leading-none">SmileCare</span>
-                            <span className="text-[10px] font-bold text-sky-600 uppercase tracking-widest">Admin Cloud</span>
+                            <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">Admin Cloud</span>
                         </div>
                     </div>
                 </div>
@@ -428,13 +583,13 @@ function Dashboard() {
                                 <div className="flex bg-slate-50 p-1 rounded-2xl border border-slate-100">
                                     <button
                                         onClick={() => setViewMode('calendar')}
-                                        className={`px-6 py-2 text-xs font-black uppercase tracking-widest rounded-xl transition-all ${viewMode === 'calendar' ? 'bg-white shadow-md text-sky-600' : 'text-slate-400 hover:text-slate-600'}`}
+                                        className={`px-6 py-2 text-xs font-black uppercase tracking-widest rounded-xl transition-all ${viewMode === 'calendar' ? 'bg-white shadow-md text-indigo-600' : 'text-slate-400 hover:text-slate-600'}`}
                                     >
                                         Calendar
                                     </button>
                                     <button
                                         onClick={() => setViewMode('list')}
-                                        className={`px-6 py-2 text-xs font-black uppercase tracking-widest rounded-xl transition-all ${viewMode === 'list' ? 'bg-white shadow-md text-sky-600' : 'text-slate-400 hover:text-slate-600'}`}
+                                        className={`px-6 py-2 text-xs font-black uppercase tracking-widest rounded-xl transition-all ${viewMode === 'list' ? 'bg-white shadow-md text-indigo-600' : 'text-slate-400 hover:text-slate-600'}`}
                                     >
                                         Activity
                                     </button>
@@ -448,7 +603,7 @@ function Dashboard() {
                             </div>
                             <button
                                 onClick={() => setActiveTab('Overview')}
-                                className="h-11 w-11 flex items-center justify-center rounded-2xl bg-white border border-slate-100 text-slate-500 shadow-sm transition-all hover:text-sky-600 hover:bg-slate-50 active:scale-95"
+                                className="h-11 w-11 flex items-center justify-center rounded-2xl bg-white border border-slate-100 text-slate-500 shadow-sm transition-all hover:text-indigo-600 hover:bg-slate-50 active:scale-95"
                             >
                                 <Bell size={18} />
                             </button>
@@ -456,7 +611,7 @@ function Dashboard() {
                             <div className="flex items-center gap-3 pl-2">
                                 <div className="text-right">
                                     <p className="text-xs font-black text-slate-900 leading-none">Admin</p>
-                                    <p className="text-[10px] font-bold text-sky-600 uppercase tracking-widest">Master Studio</p>
+                                    <p className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">Master Studio</p>
                                 </div>
                                 <div className="w-10 h-10 rounded-2xl bg-slate-950 flex items-center justify-center text-white font-black text-sm shadow-xl shadow-slate-200">A</div>
                             </div>
@@ -490,7 +645,7 @@ function Dashboard() {
                                                         <tr key={booking.id} className="hover:bg-slate-50/50 transition-colors">
                                                             <td className="px-8 py-5 font-black text-slate-900">{booking.name}</td>
                                                             <td className="px-8 py-5">
-                                                                <span className="px-3 py-1 bg-sky-50 text-sky-600 rounded-full text-[10px] font-bold uppercase tracking-wider">{booking.service}</span>
+                                                                <span className="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-[10px] font-bold uppercase tracking-wider">{booking.service}</span>
                                                             </td>
                                                             <td className="px-8 py-5 text-slate-500 font-medium">{booking.date}</td>
                                                             <td className="px-8 py-5 font-bold text-slate-900">{booking.time}</td>
@@ -523,6 +678,7 @@ function Dashboard() {
                     </AnimatePresence>
                 </div>
             </main>
+            {renderPatientModal()}
         </div>
     );
 }
