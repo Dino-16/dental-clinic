@@ -24,7 +24,8 @@ import {
     Sparkles,
     ArrowRight,
     X,
-    ShieldCheck
+    ShieldCheck,
+    Menu
 } from 'lucide-react';
 import {
     format,
@@ -47,6 +48,7 @@ function Dashboard() {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [activeTab, setActiveTab] = useState('Overview');
     const [selectedPatient, setSelectedPatient] = useState(null);
+    const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
     useEffect(() => {
         const auth = localStorage.getItem('smilecare_auth');
@@ -572,12 +574,84 @@ function Dashboard() {
                     </button>
                 </div>
             </aside>
+            {/* Mobile Sidebar Overlay */}
+            <AnimatePresence>
+                {isMobileSidebarOpen && (
+                    <>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsMobileSidebarOpen(false)}
+                            className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm lg:hidden"
+                        />
+                        <motion.aside
+                            initial={{ x: '-100%' }}
+                            animate={{ x: 0 }}
+                            exit={{ x: '-100%' }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                            className="fixed top-0 left-0 bottom-0 z-[60] w-72 flex flex-col bg-white lg:hidden"
+                        >
+                            <div className="p-8 flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
+                                        <Stethoscope size={24} />
+                                    </div>
+                                    <div>
+                                        <span className="text-xl font-black text-slate-900 tracking-tight block leading-none">SmileCare</span>
+                                        <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">Admin Cloud</span>
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={() => setIsMobileSidebarOpen(false)}
+                                    className="p-2 text-slate-400 hover:text-slate-900"
+                                >
+                                    <X size={20} />
+                                </button>
+                            </div>
+                            <nav className="flex-1 space-y-2 px-4">
+                                {navItems.map((item) => (
+                                    <button
+                                        key={item.name}
+                                        onClick={() => {
+                                            setActiveTab(item.name);
+                                            setIsMobileSidebarOpen(false);
+                                        }}
+                                        className={`flex w-full items-center gap-4 rounded-2xl px-5 py-4 text-sm font-bold tracking-tight transition-all active:scale-[0.98] ${activeTab === item.name
+                                            ? 'bg-slate-950 text-white shadow-xl shadow-slate-200'
+                                            : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                                            }`}
+                                    >
+                                        {item.icon}
+                                        {item.name}
+                                    </button>
+                                ))}
+                            </nav>
+                            <div className="p-6 border-t border-slate-50">
+                                <button
+                                    onClick={handleLogout}
+                                    className="flex w-full items-center gap-4 rounded-2xl px-5 py-4 text-sm font-bold text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-all active:scale-[0.98]"
+                                >
+                                    <LogOut size={20} />
+                                    Logout
+                                </button>
+                            </div>
+                        </motion.aside>
+                    </>
+                )}
+            </AnimatePresence>
 
             {/* Main Content */}
             <main className="flex-1">
                 <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-100 px-10 py-6">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-8">
+                            <button
+                                onClick={() => setIsMobileSidebarOpen(true)}
+                                className="lg:hidden h-11 w-11 flex items-center justify-center rounded-2xl bg-white border border-slate-100 text-slate-500 shadow-sm transition-all hover:text-indigo-600 hover:bg-slate-50 active:scale-95 mr-2"
+                            >
+                                <Menu size={20} />
+                            </button>
                             <h2 className="text-2xl font-black text-slate-900 tracking-tight">{activeTab}</h2>
                             {activeTab === 'Appointments' && (
                                 <div className="flex bg-slate-50 p-1 rounded-2xl border border-slate-100">
@@ -609,7 +683,7 @@ function Dashboard() {
                             </button>
                             <div className="w-px h-8 bg-slate-100 mx-2" />
                             <div className="flex items-center gap-3 pl-2">
-                                <div className="text-right">
+                                <div className="hidden sm:block text-right">
                                     <p className="text-xs font-black text-slate-900 leading-none">Admin</p>
                                     <p className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">Master Studio</p>
                                 </div>
