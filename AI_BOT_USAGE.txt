@@ -1,0 +1,40 @@
+SmileCare AI Reservation – How to Use
+
+This AI assistant helps patients book a dental appointment through a short conversation.
+
+How to start
+- Type a message that includes “book” or “appointment”.
+- Example: “I want to book an appointment.”
+
+Conversation flow (questions & answers)
+1) Bot: “I'd be happy to help you book an appointment! What service are you looking for?”
+   You: Provide the service name.
+   Examples: “Teeth Cleaning”, “Invisalign consult”, “Smile makeover”.
+
+2) Bot: “Thanks! What is your name?”
+   You: Provide your full name.
+   Example: “Maria Santos”.
+
+3) Bot: “Great! What date would you prefer for your appointment?”
+   You: Provide the date.
+   Example: “March 12, 2026”.
+
+4) Bot: “Perfect! What time works best for you?”
+   You: Provide the time.
+   Example: “2:30 PM”.
+
+5) Bot (confirmation):
+   “Excellent, [Name]! Your appointment is confirmed:
+    Service: [Service]
+    Date: [Date]
+    Time: [Time]
+
+    We'll send you a confirmation shortly. Is there anything else I can help you with?”
+
+Other messages the bot can show
+- Welcome message: “Welcome to SmileCare Dental! How can I help you today?”
+- If you ask something unrelated:
+  “I can help you book appointments, answer questions about our services, or provide clinic information. What would you like to know?”
+
+Tips
+- If you want to book again, type “book” or “appointment” to restart the flow.
