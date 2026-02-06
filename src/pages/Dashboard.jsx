@@ -409,13 +409,20 @@ function Dashboard() {
                             placeholder="Patient Name"
                             className="bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-sm"
                         />
-                        <input
-                            type="text"
-                            value={formService}
-                            onChange={(e) => setFormService(e.target.value)}
-                            placeholder="Service"
-                            className="bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-sm"
-                        />
+                        <div>
+                            <label className="block text-[10px] text-slate-400 uppercase tracking-widest ml-1 mb-2">Service</label>
+                            <select
+                                value={formService}
+                                onChange={(e) => setFormService(e.target.value)}
+                                required
+                                className="bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-sm"
+                            >
+                                <option value="" disabled>Select a service</option>
+                                {allServices.map((s) => (
+                                    <option key={s} value={s}>{s}</option>
+                                ))}
+                            </select>
+                        </div>
                         <div className="grid grid-cols-2 gap-4">
                             <input
                                 type="date"
