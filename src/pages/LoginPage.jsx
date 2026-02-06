@@ -19,46 +19,45 @@ function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 flex flex-col justify-center items-center px-6 relative overflow-hidden">
+        <div className="min-h-screen bg-blue-300 flex flex-col justify-center items-center px-6 relative overflow-hidden selection:bg-blue-100 selection:text-blue-900">
             {/* Background decoration */}
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
-                <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-200/30 rounded-full blur-[100px]" />
-                <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-violet-200/30 rounded-full blur-[100px]" />
+                <div className="absolute -top-12 -left-12 w-64 h-64 bg-blue-200/20 rounded-full blur-[80px]" />
+                <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-blue-200/20 rounded-full blur-[80px]" />
             </div>
 
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="w-full max-w-md relative z-10"
+                className="w-full max-w-[380px] relative z-10"
             >
-                <div className="text-center mb-10">
-                    <Link to="/" className="inline-flex items-center gap-2 group mb-8">
-                        <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg transition-transform group-hover:scale-110">
-                            <Stethoscope size={28} />
+                <div className="text-center mb-8">
+                    <Link to="/" className="inline-flex items-center gap-3 group mb-6">
+                        <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-100 transition-transform group-hover:scale-110">
+                            <Stethoscope size={22} />
                         </div>
-                        <div className="text-left">
-                            <span className="text-xl font-black text-slate-900 block">SmileCare</span>
-                            <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest -mt-1">Secure Admin</span>
+                        <div className="text-left leading-none">
+                            <span className="text-lg font-black text-slate-900">SMILE<span className="text-blue-600">CARE</span></span>
+                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mt-0.5">Secure Admin Portal</span>
                         </div>
                     </Link>
-                    <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Welcome Back</h1>
-                    <p className="text-slate-500 mt-2 font-medium">Access your clinic control center</p>
+                    <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Admin Authentication</h1>
                 </div>
 
-                <div className="bg-white p-10 rounded-[40px] shadow-2xl shadow-slate-200/50 border border-white">
-                    <form onSubmit={handleLogin} className="space-y-6">
+                <div className="bg-white p-8 rounded-3xl shadow-xl shadow-slate-200/40 border border-slate-100">
+                    <form onSubmit={handleLogin} className="space-y-5">
                         <div>
-                            <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1 mb-2">Security Key</label>
+                            <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 mb-2">Access Key</label>
                             <div className="relative group">
-                                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-600 transition-colors">
-                                    <Lock size={18} />
+                                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors">
+                                    <Lock size={16} />
                                 </div>
                                 <input
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="Enter admin password"
-                                    className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 pl-12 pr-6 text-sm font-medium focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 focus:bg-white transition-all shadow-inner"
+                                    placeholder="••••••••"
+                                    className="w-full bg-slate-50 border border-slate-100 rounded-xl py-3.5 pl-11 pr-5 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:bg-white transition-all"
                                     required
                                 />
                             </div>
@@ -66,33 +65,33 @@ function LoginPage() {
 
                         {error && (
                             <motion.div
-                                initial={{ opacity: 0, scale: 0.95 }}
+                                initial={{ opacity: 0, scale: 0.98 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                className="p-3 bg-rose-50 border border-rose-100 rounded-xl flex items-center gap-3 text-rose-600 text-xs font-bold"
+                                className="p-3 bg-rose-50 border border-rose-100 rounded-xl flex items-center gap-3 text-rose-600 text-[11px] font-bold"
                             >
-                                <Shield size={16} />
+                                <Shield size={14} className="flex-shrink-0" />
                                 {error}
                             </motion.div>
                         )}
 
                         <button
                             type="submit"
-                            className="w-full bg-slate-950 text-white rounded-2xl py-4 font-bold text-sm hover:bg-slate-800 transition-all active:scale-[0.98] shadow-lg shadow-slate-200 flex items-center justify-center gap-2 group"
+                            className="w-full bg-slate-950 text-white rounded-xl py-3.5 font-black text-[11px] uppercase tracking-widest hover:bg-slate-800 transition-all active:scale-[0.97] shadow-lg shadow-slate-100 flex items-center justify-center gap-2 group"
                         >
-                            Sign In <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                            Establish Connection <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                         </button>
                     </form>
 
-                    <div className="mt-10 pt-8 border-t border-slate-50 text-center">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-50 rounded-full border border-slate-100">
-                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Demo Access:</span>
-                            <span className="text-[10px] font-bold text-indigo-600">admin123</span>
+                    <div className="mt-8 pt-6 border-t border-slate-50 text-center">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-50 rounded-lg border border-slate-100">
+                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Demo:</span>
+                            <span className="text-[9px] font-black text-blue-600 tracking-widest">admin123</span>
                         </div>
                     </div>
                 </div>
 
-                <p className="mt-8 text-center text-sm font-medium text-slate-400">
-                    Need help? <a href="#" className="text-indigo-600 hover:underline">Contact System Admin</a>
+                <p className="mt-6 text-center text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+                    Authorized Personnel Only
                 </p>
             </motion.div>
         </div>

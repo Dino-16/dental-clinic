@@ -22,9 +22,9 @@ const servicesData = {
         title: 'General Dentistry',
         tagline: 'Comprehensive care for your family\'s oral health.',
         miniDesc: 'Maintaining your natural smile through preventive care and expert diagnostics.',
-        icon: <Stethoscope size={48} />,
-        color: 'text-indigo-600',
-        bg: 'bg-indigo-50',
+        icon: <Stethoscope size={40} />,
+        color: 'text-blue-600',
+        bg: 'bg-blue-50',
         image: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=800',
         description: 'Our general dentistry services are the foundation of a healthy smile. We focus on preventive care, early detection, and personalized treatment plans to ensure long-term oral health for patients of all ages. Regular check-ups are essential for catching issues before they become painful and expensive.',
         process: [
@@ -45,9 +45,9 @@ const servicesData = {
         title: 'Cosmetic Studio',
         tagline: 'Design the smile you\'ve always dreamed of.',
         miniDesc: 'Combining artistry and precision to transform your confidence.',
-        icon: <Sparkles size={48} />,
-        color: 'text-indigo-600',
-        bg: 'bg-indigo-50',
+        icon: <Sparkles size={40} />,
+        color: 'text-blue-600',
+        bg: 'bg-blue-50',
         image: 'https://images.unsplash.com/photo-1593054941142-5507cc368297?auto=format&fit=crop&q=80&w=800',
         description: 'Transform your appearance with our state-of-the-art cosmetic treatments. We combine artistic vision with clinical precision to create natural, stunning results. Whether you want to straighten, whiten, or completely reshape your smile, we have the advanced tools to make it happen.',
         process: [
@@ -68,9 +68,9 @@ const servicesData = {
         title: 'AI Diagnostics',
         tagline: 'Precision analysis powered by modern intelligence.',
         miniDesc: 'Using neural networks to find issues 40% faster than the human eye.',
-        icon: <Shield size={48} />,
-        color: 'text-indigo-600',
-        bg: 'bg-indigo-50',
+        icon: <Shield size={40} />,
+        color: 'text-blue-600',
+        bg: 'bg-blue-50',
         image: 'https://images.unsplash.com/photo-1576091160550-217359f42f8c?auto=format&fit=crop&q=80&w=800',
         description: 'We leverage cutting-edge artificial intelligence to analyze dental scans with unprecedented accuracy. Our neural networks are trained on millions of clinical samples to detect decay, bone loss, and structural abnormalities long before they are visible to the human eye.',
         process: [
@@ -91,7 +91,7 @@ const servicesData = {
         title: 'Emergency Care',
         tagline: 'Immediate relief when you need it most.',
         miniDesc: 'Same-day response for pain, trauma, and urgent dental needs.',
-        icon: <Clock size={48} />,
+        icon: <Clock size={40} />,
         color: 'text-rose-600',
         bg: 'bg-rose-50',
         image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=800',
@@ -114,9 +114,9 @@ const servicesData = {
         title: 'Restorative Care',
         tagline: 'Restore function and beauty to your smile.',
         miniDesc: 'Bringing back the strength and look of your natural teeth.',
-        icon: <CheckCircle2 size={48} />,
-        color: 'text-emerald-600',
-        bg: 'bg-emerald-50',
+        icon: <CheckCircle2 size={40} />,
+        color: 'text-blue-600',
+        bg: 'bg-blue-50',
         image: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&q=80&w=800',
         description: 'From single fillings to full arch reconstructions, our restorative services bring back the strength and look of your natural teeth. We use bio-compatible materials that mimic the light-reflecting properties of real enamel for a seamless finish.',
         process: [
@@ -137,9 +137,9 @@ const servicesData = {
         title: 'Oral Surgery',
         tagline: 'Expert surgical procedures with a gentle touch.',
         miniDesc: 'High-precision surgical care with advanced comfort options.',
-        icon: <Calendar size={48} />,
-        color: 'text-violet-600',
-        bg: 'bg-violet-50',
+        icon: <Calendar size={40} />,
+        color: 'text-teal-600',
+        bg: 'bg-teal-50',
         image: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&q=80&w=800',
         description: 'Our surgical team specializes in precise, low-trauma procedures. We utilize advanced technology like guided surgical stents to ensure faster healing and minimal discomfort. We prioritize your comfort with multiple sedation options tailored to your anxiety level.',
         process: [
@@ -170,166 +170,170 @@ function ServiceDetailPage() {
 
     if (!service) {
         return (
-            <div className="min-h-screen flex items-center justify-center p-6 text-center">
+            <div className="min-h-screen flex items-center justify-center p-6 text-center bg-slate-50 selection:bg-blue-100">
                 <div>
-                    <h1 className="text-4xl font-black mb-4">Service Not Found</h1>
-                    <Link to="/" className="text-indigo-600 font-bold hover:underline">Return to Home</Link>
+                    <h1 className="text-3xl font-black mb-4 text-slate-900">Resource Unavailable</h1>
+                    <Link to="/" className="text-blue-600 font-bold hover:underline uppercase tracking-widest text-xs">Establish Recovery Route</Link>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 font-sans selection:bg-sky-100">
-            {/* Header / Nav */}
-            <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 py-4">
+        <div className="min-h-screen bg-slate-50 font-sans selection:bg-blue-100 selection:text-blue-900">
+            {/* Nav */}
+            <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 py-3.5">
                 <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-                    <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-slate-600 hover:text-slate-900 font-bold transition-colors">
-                        <ArrowLeft size={20} />
+                    <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">
+                        <ArrowLeft size={16} />
                         Back
                     </button>
-                    <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
-                            <Stethoscope size={20} />
+                    <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-100">
+                            <Stethoscope size={18} />
                         </div>
-                        <span className="font-bold tracking-tight">SmileCare</span>
+                        <span className="text-lg font-black tracking-tighter leading-none">SMILE<span className="text-blue-600">CARE</span></span>
                     </div>
                     <button
                         onClick={() => setChatOpen(true)}
-                        className="bg-slate-950 text-white px-5 py-2 rounded-full text-xs font-bold hover:bg-slate-800 transition-all font-sans"
+                        className="bg-slate-950 text-white px-5 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all active:scale-95"
                     >
-                        Book Now
+                        Book Agent
                     </button>
                 </div>
             </nav>
 
-            <main className="pt-32 pb-24">
+            <main className="pt-28 pb-20">
                 <div className="max-w-7xl mx-auto px-6">
-                    {/* Hero Section */}
-                    <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
+                    {/* Hero */}
+                    <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 items-center mb-20">
                         <motion.div
-                            initial={{ opacity: 0, x: -20 }}
+                            initial={{ opacity: 0, x: -15 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <div className={`w-20 h-20 ${service.bg} ${service.color} rounded-[28px] flex items-center justify-center mb-8 shadow-sm`}>
+                            <div className={`w-14 h-14 ${service.bg} ${service.color} rounded-2xl flex items-center justify-center mb-6 shadow-sm`}>
                                 {service.icon}
                             </div>
-                            <h1 className="text-5xl lg:text-6xl font-black text-slate-900 mb-6 leading-tight">
+                            <h1 className="text-4xl lg:text-5xl font-black text-slate-900 mb-5 leading-tight tracking-tight">
                                 {service.title}
                             </h1>
-                            <p className="text-2xl font-bold text-indigo-600 mb-8 leading-relaxed">
+                            <p className="text-xl font-bold text-blue-600 mb-6 leading-relaxed">
                                 {service.tagline}
                             </p>
-                            <p className="text-lg text-slate-600 leading-relaxed mb-10 max-w-xl">
+                            <p className="text-base text-slate-500 leading-relaxed mb-8 max-w-xl font-medium">
                                 {service.description}
                             </p>
-                            <div className="flex flex-wrap gap-4">
+                            <div className="flex flex-wrap gap-3">
                                 <button
                                     onClick={() => setChatOpen(true)}
-                                    className="px-8 py-4 bg-slate-950 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all active:scale-95 shadow-xl shadow-slate-200"
+                                    className="px-7 py-3.5 bg-slate-950 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all active:scale-95 shadow-lg shadow-slate-200"
                                 >
                                     Book This Service
                                 </button>
                                 <button
                                     onClick={() => setChatOpen(true)}
-                                    className="px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-2xl font-bold hover:bg-slate-50 transition-all"
+                                    className="px-7 py-3.5 bg-white text-slate-950 border border-slate-200 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-50 transition-all"
                                 >
-                                    Consult an Expert
+                                    Consult Analyst
                                 </button>
                             </div>
                         </motion.div>
 
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
+                            initial={{ opacity: 0, scale: 0.98 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
                             className="relative"
                         >
-                            <div className="absolute -inset-4 bg-gradient-to-tr from-indigo-200 to-violet-200 blur-3xl opacity-20 -z-10 rounded-[40px]" />
-                            <div className="glass-card rounded-[40px] p-2 aspect-square overflow-hidden shadow-2xl">
+                            <div className="absolute -inset-4 bg-gradient-to-tr from-blue-100 to-blue-100 blur-3xl opacity-30 -z-10 rounded-3xl" />
+                            <div className="bg-white rounded-3xl p-2 aspect-[4/3] overflow-hidden shadow-xl border border-white">
                                 <img
                                     src={service.image}
                                     alt={service.title}
-                                    className="w-full h-full object-cover rounded-[34px]"
+                                    className="w-full h-full object-cover rounded-2xl"
                                 />
                             </div>
                         </motion.div>
                     </div>
 
                     {/* Features Grid */}
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
                         {service.features.map((feature, i) => (
-                            <div key={i} className="p-8 rounded-[40px] bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300">
-                                <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 mb-6">
-                                    <CheckCircle2 size={24} />
+                            <div key={i} className="p-6 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 group">
+                                <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-4 group-hover:scale-110 transition-transform">
+                                    <CheckCircle2 size={20} />
                                 </div>
-                                <h3 className="text-lg font-bold text-slate-900 mb-3">{feature.title}</h3>
-                                <p className="text-sm text-slate-500 font-medium leading-relaxed">{feature.desc}</p>
+                                <h3 className="text-base font-bold text-slate-900 mb-2">{feature.title}</h3>
+                                <p className="text-[11px] text-slate-500 font-bold leading-relaxed">{feature.desc}</p>
                             </div>
                         ))}
                     </div>
 
                     {/* Content Section */}
-                    <div className="grid lg:grid-cols-[1.5fr_1fr] gap-20 items-start">
-                        <div className="space-y-16">
+                    <div className="grid lg:grid-cols-[1.6fr_1fr] gap-16 items-start">
+                        <div className="space-y-12">
                             <section>
-                                <h2 className="text-3xl font-black text-slate-900 mb-10 flex items-center gap-3">
-                                    <div className="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600">
-                                        <Clock size={24} />
+                                <h2 className="text-2xl font-black text-slate-900 mb-8 flex items-center gap-3">
+                                    <div className="w-9 h-9 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 shadow-sm border border-blue-100">
+                                        <Clock size={20} />
                                     </div>
-                                    Clinical Process
+                                    Clinical Protocol
                                 </h2>
-                                <div className="space-y-8 relative before:absolute before:left-5 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-100">
+                                <div className="space-y-6 relative before:absolute before:left-4 before:top-2 before:bottom-2 before:w-px before:bg-slate-100">
                                     {service.process.map((p, i) => (
-                                        <div key={i} className="relative pl-12">
-                                            <div className="absolute left-0 top-0 w-10 h-10 bg-white border-2 border-slate-100 rounded-full flex items-center justify-center text-sm font-black text-slate-400 z-10">
-                                                {i + 1}
+                                        <div key={i} className="relative pl-10">
+                                            <div className="absolute left-0 top-0 w-8 h-8 bg-white border border-slate-200 rounded-full flex items-center justify-center text-[10px] font-black text-slate-400 z-10 shadow-sm">
+                                                {String(i + 1).padStart(2, '0')}
                                             </div>
-                                            <h4 className="text-lg font-bold text-slate-900 mb-2">{p.step}</h4>
-                                            <p className="text-slate-500 font-medium leading-relaxed">{p.detail || p.desc}</p>
+                                            <h4 className="text-base font-bold text-slate-900 mb-1.5">{p.step}</h4>
+                                            <p className="text-xs text-slate-500 font-bold leading-relaxed">{p.detail || p.desc}</p>
                                         </div>
                                     ))}
                                 </div>
                             </section>
 
                             <section>
-                                <h2 className="text-3xl font-black text-slate-900 mb-8 flex items-center gap-3">
-                                    <ShieldCheck className="text-indigo-600" />
-                                    Why choose our {service.title}?
+                                <h2 className="text-2xl font-black text-slate-900 mb-6 flex items-center gap-3">
+                                    <div className="w-9 h-9 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 shadow-sm border border-blue-100">
+                                        <ShieldCheck size={20} />
+                                    </div>
+                                    Operational Benefits
                                 </h2>
-                                <div className="grid sm:grid-cols-2 gap-4">
+                                <div className="grid sm:grid-cols-2 gap-3">
                                     {service.benefits.map((benefit, i) => (
-                                        <div key={i} className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-slate-100">
-                                            <Zap size={18} className="text-amber-500" />
-                                            <span className="font-bold text-slate-700 text-sm">{benefit}</span>
+                                        <div key={i} className="flex items-center gap-3 p-3.5 bg-white rounded-xl border border-slate-100 shadow-sm">
+                                            <Zap size={16} className="text-amber-500" />
+                                            <span className="font-bold text-slate-700 text-[11px] uppercase tracking-widest">{benefit}</span>
                                         </div>
                                     ))}
                                 </div>
                             </section>
 
                             <section>
-                                <h2 className="text-3xl font-black text-slate-900 mb-8 flex items-center gap-3">
-                                    <Star className="text-amber-500" />
-                                    Patient Feedback
+                                <h2 className="text-2xl font-black text-slate-900 mb-8 flex items-center gap-3">
+                                    <div className="w-9 h-9 bg-amber-50 rounded-xl flex items-center justify-center text-amber-500 shadow-sm border border-amber-100">
+                                        <Star size={20} />
+                                    </div>
+                                    Patient Feed
                                 </h2>
-                                <div className="space-y-6">
+                                <div className="space-y-4">
                                     {[1, 2].map((i) => (
-                                        <div key={i} className="p-8 rounded-[40px] bg-indigo-600 text-white relative overflow-hidden">
-                                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
-                                            <div className="flex gap-1 mb-6">
-                                                {[1, 2, 3, 4, 5].map(s => <Star key={s} size={16} fill="white" />)}
+                                        <div key={i} className="p-7 rounded-3xl bg-slate-950 text-white relative overflow-hidden group">
+                                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" />
+                                            <div className="flex gap-1 mb-4">
+                                                {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#2563eb" className="text-blue-500" />)}
                                             </div>
-                                            <p className="text-lg font-bold leading-relaxed mb-8 relative z-10">
-                                                "The care I received for my {service.title.toLowerCase()} was absolutely top-notch. I never felt so comfortable at a dentist before."
+                                            <p className="text-base font-bold leading-relaxed mb-6 relative z-10 italic">
+                                                "The precision care I received for my {service.title.toLowerCase()} was phenomenal. The AI diagnostics added a level of layer I've never seen."
                                             </p>
-                                            <div className="flex items-center gap-4 relative z-10">
-                                                <div className="w-10 h-10 rounded-full bg-white/20 p-0.5">
-                                                    <img src={`https://i.pravatar.cc/150?u=${i + 20}`} className="w-full h-full rounded-full" alt="" />
+                                            <div className="flex items-center gap-3 relative z-10">
+                                                <div className="w-9 h-9 rounded-xl bg-white/10 p-0.5 border border-white/10">
+                                                    <img src={`https://i.pravatar.cc/150?u=${i + 20}`} className="w-full h-full rounded-[10px]" alt="" />
                                                 </div>
                                                 <div>
-                                                    <div className="font-bold text-sm">Patient Review</div>
-                                                    <div className="text-[10px] uppercase font-black text-white/60">Verified Patient</div>
+                                                    <div className="font-bold text-xs">Resident User</div>
+                                                    <div className="text-[9px] uppercase font-black text-blue-400 tracking-widest">Verified Session</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -338,49 +342,48 @@ function ServiceDetailPage() {
                             </section>
                         </div>
 
-                        <aside className="sticky top-32">
-                            <div className="p-10 rounded-[40px] bg-slate-900 text-white relative overflow-hidden shadow-2xl">
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-[100px]" />
+                        <aside className="sticky top-28">
+                            <div className="p-8 rounded-3xl bg-white border border-slate-100 text-slate-900 relative overflow-hidden shadow-xl">
+                                <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl" />
                                 <div className="relative z-10">
-                                    <div className="flex items-center gap-3 mb-8">
-                                        <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center">
-                                            <Clock size={24} />
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <div className="w-11 h-11 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-100">
+                                            <Clock size={20} />
                                         </div>
                                         <div>
-                                            <h3 className="text-xl font-bold">Quick Booking</h3>
-                                            <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">Takes ~60 seconds</p>
+                                            <h3 className="text-lg font-black tracking-tight">Express Sync</h3>
+                                            <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Instant Queueing</p>
                                         </div>
                                     </div>
-                                    <p className="text-slate-400 mb-10 leading-relaxed font-medium">
-                                        Ready to experience modern dental care? Our AI assistant is standing by to help you schedule your {service.title.toLowerCase()} appointment.
+                                    <p className="text-slate-500 mb-8 text-[13px] leading-relaxed font-medium">
+                                        Our autonomous agent is ready to allocate resources for your session. Average processing time: 42 seconds.
                                     </p>
                                     <button
                                         onClick={() => setChatOpen(true)}
-                                        className="w-full bg-white text-slate-900 py-5 rounded-3xl font-black hover:bg-indigo-50 transition-all active:scale-95 mb-4 shadow-xl shadow-black/20"
+                                        className="w-full bg-slate-950 text-white py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all active:scale-95 shadow-lg shadow-slate-200"
                                     >
-                                        Start AI Booking
+                                        Initiate AI Booking
                                     </button>
-                                    <div className="flex items-center justify-center gap-8 text-center pt-6 border-t border-white/10">
-                                        <div>
-                                            <div className="text-xl font-bold">4.9/5</div>
-                                            <div className="text-[10px] uppercase font-bold text-slate-500 tracking-widest">Rating</div>
+                                    <div className="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-slate-50">
+                                        <div className="text-center">
+                                            <div className="text-lg font-black text-slate-900">4.98</div>
+                                            <div className="text-[8px] uppercase font-black text-slate-400 tracking-widest">Precision</div>
                                         </div>
-                                        <div className="h-8 w-px bg-white/10" />
-                                        <div>
-                                            <div className="text-xl font-bold">2k+</div>
-                                            <div className="text-[10px] uppercase font-bold text-slate-500 tracking-widest">Patients</div>
+                                        <div className="text-center border-l border-slate-50">
+                                            <div className="text-lg font-black text-blue-600">Sync</div>
+                                            <div className="text-[8px] uppercase font-black text-slate-400 tracking-widest">Active</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="mt-8 p-8 rounded-[40px] bg-emerald-50 border border-emerald-100 flex items-center gap-6">
-                                <div className="w-14 h-14 bg-emerald-500 rounded-full flex items-center justify-center text-white shadow-lg shadow-emerald-200">
-                                    <Shield size={28} />
+                            <div className="mt-6 p-6 rounded-2xl bg-blue-50 border border-blue-100 flex items-center gap-5">
+                                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-blue-600 shadow-sm">
+                                    <Shield size={24} />
                                 </div>
                                 <div className="flex-1">
-                                    <h4 className="font-bold text-emerald-900">Insurance Accepted</h4>
-                                    <p className="text-xs text-emerald-700 font-medium">We work with all major providers.</p>
+                                    <h4 className="font-bold text-blue-900 text-sm">Insured Access</h4>
+                                    <p className="text-[10px] text-blue-700 font-medium uppercase tracking-widest">Global Payers Supported</p>
                                 </div>
                             </div>
                         </aside>
@@ -388,20 +391,19 @@ function ServiceDetailPage() {
                 </div>
             </main>
 
-            {/* Footer / CTA Mini */}
-            <footer className="py-12 bg-white border-t border-slate-100">
-                <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
-                    <div>
-                        <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                            <Stethoscope size={20} className="text-indigo-600" />
-                            <span className="font-black">SmileCare</span>
+            {/* Footer */}
+            <footer className="py-10 bg-white border-t border-slate-100">
+                <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 bg-slate-900 rounded-lg flex items-center justify-center text-white">
+                            <Stethoscope size={16} />
                         </div>
-                        <p className="text-sm text-slate-500 font-medium">© 2026 SmileCare Dental Studio. Professional AI-powered dentistry.</p>
+                        <span className="text-sm font-black tracking-tight uppercase">SmileCare <span className="text-slate-400">OS</span></span>
                     </div>
-                    <div className="flex gap-10">
-                        <Link to="/" className="text-sm font-bold text-slate-600 hover:text-indigo-600 transition-colors">Home</Link>
-                        <a href="#" className="text-sm font-bold text-slate-600 hover:text-indigo-600 transition-colors">Privacy</a>
-                        <a href="#" className="text-sm font-bold text-slate-600 hover:text-indigo-600 transition-colors">Terms</a>
+                    <div className="flex gap-8">
+                        <Link to="/" className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-blue-600 transition-colors">Infrastructure</Link>
+                        <a href="#" className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-blue-600 transition-colors">Privacy Ops</a>
+                        <a href="#" className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-blue-600 transition-colors">Protocols</a>
                     </div>
                 </div>
             </footer>

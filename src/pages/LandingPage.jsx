@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Calendar,
@@ -53,17 +53,17 @@ function LandingPage() {
         <div className="min-h-screen font-sans selection:bg-indigo-100 selection:text-indigo-900">
             {/* Navigation */}
             <nav
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-slate-200 py-4' : 'bg-transparent py-6'
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-gray-200 py-4' : 'bg-transparent py-6'
                     }`}
             >
                 <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                     <div className="flex items-center gap-2 group cursor-pointer">
-                        <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200 group-hover:scale-110 transition-transform">
-                            <Stethoscope size={24} />
+                        <div className="w-8 h-8 bg-indigo-600 rounded-md flex items-center justify-center text-white shadow-lg shadow-indigo-200 group-hover:scale-110 transition-transform">
+                            <Stethoscope size={18} />
                         </div>
                         <div>
-                            <span className="text-xl font-extrabold tracking-tight text-slate-900">SmileCare</span>
-                            <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-indigo-600 -mt-1">DENTAL STUDIO</span>
+                            <span className="text-lg font-extrabold tracking-tight text-gray-900">SmileCare</span>
+                            <span className="block text-[9px] uppercase tracking-[0.2em] font-bold text-indigo-600 -mt-1">DENTAL STUDIO</span>
                         </div>
                     </div>
 
@@ -72,24 +72,24 @@ function LandingPage() {
                             <a
                                 key={item}
                                 href={`#${item.toLowerCase()}`}
-                                className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
+                                className="text-sm font-semibold text-gray-600 hover:text-indigo-600 transition-colors"
                             >
                                 {item}
                             </a>
                         ))}
-                        <div className="h-6 w-px bg-slate-200" />
-                        <Link to="/login" className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">
+                        <div className="h-6 w-px bg-gray-200" />
+                        <Link to="/login" className="text-sm font-semibold text-gray-600 hover:text-indigo-600 transition-colors">
                             Admin
                         </Link>
                         <button
                             onClick={() => setChatOpen(true)}
-                            className="bg-slate-950 text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-slate-800 transition-all active:scale-95 shadow-lg shadow-slate-200"
+                            className="bg-gray-900 text-white px-5 py-2 rounded-md text-sm font-semibold hover:bg-gray-800 transition-all active:scale-95 shadow-lg shadow-gray-200"
                         >
                             Get Started
                         </button>
                     </div>
 
-                    <button className="md:hidden text-slate-900" onClick={() => setMobileMenuOpen(true)}>
+                    <button className="md:hidden text-gray-900" onClick={() => setMobileMenuOpen(true)}>
                         <Menu size={24} />
                     </button>
                 </div>
@@ -105,10 +105,10 @@ function LandingPage() {
                     >
                         <div className="flex justify-between items-center mb-12">
                             <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
-                                    <Stethoscope size={20} />
+                                <div className="w-8 h-8 bg-violet-600 rounded-md flex items-center justify-center text-white">
+                                    <Stethoscope size={18} />
                                 </div>
-                                <span className="text-lg font-bold">SmileCare</span>
+                                <span className="text-lg font-bold text-gray-900">SmileCare</span>
                             </div>
                             <button onClick={() => setMobileMenuOpen(false)}>
                                 <X size={24} />
@@ -120,16 +120,16 @@ function LandingPage() {
                                     key={item}
                                     href={`#${item.toLowerCase()}`}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="text-2xl font-bold text-slate-900"
+                                    className="text-2xl font-bold text-gray-900"
                                 >
                                     {item}
                                 </a>
                             ))}
                             <hr />
-                            <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="text-xl font-bold text-slate-900">Admin</Link>
+                            <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="text-xl font-bold text-gray-900">Admin</Link>
                             <button
                                 onClick={() => { setChatOpen(true); setMobileMenuOpen(false); }}
-                                className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold"
+                                className="w-full bg-violet-600 text-white py-3 rounded-lg font-bold"
                             >
                                 Book Now
                             </button>
@@ -148,31 +148,31 @@ function LandingPage() {
                         animate="animate"
                         variants={staggerContainer}
                     >
-                        <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold mb-6">
+                        <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-[10px] font-semibold mb-6">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-indigo-500"></span>
                             </span>
                             AI-POWERED DENTAL CARE
                         </motion.div>
 
-                        <motion.h1 variants={fadeIn} className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] mb-8">
+                        <motion.h1 variants={fadeIn} className="text-4xl lg:text-6xl font-extrabold text-gray-900 leading-[1.1] mb-6">
                             The future of <br />
-                            <span className="text-gradient">dentistry</span> is here.
+                            <span className="text-indigo-600">dentistry</span> is here.
                         </motion.h1>
 
-                        <motion.p variants={fadeIn} className="text-lg text-slate-600 leading-relaxed mb-10 max-w-xl">
+                        <motion.p variants={fadeIn} className="text-base text-gray-600 leading-relaxed mb-8 max-w-lg">
                             Experience a new standard of dental care where advanced technology meets human touch. Our AI-driven clinic ensures seamless bookings and personalized care.
                         </motion.p>
 
                         <motion.div variants={fadeIn} className="flex flex-wrap gap-4">
                             <button
                                 onClick={() => setChatOpen(true)}
-                                className="btn-primary gap-2"
+                                className="bg-indigo-600 text-white px-5 py-2 rounded-md text-sm font-semibold hover:bg-indigo-700 transition-all active:scale-95 shadow-lg shadow-indigo-200"
                             >
                                 Book with AI <ArrowRight size={18} />
                             </button>
-                            <a href="#services" className="btn-secondary gap-2">
+                            <a href="#services" className="bg-indigo-50 text-indigo-600 px-5 py-2 rounded-md text-sm font-semibold hover:bg-indigo-100 transition-all">
                                 Explore Services <Play size={16} fill="currentColor" />
                             </a>
                         </motion.div>
@@ -189,58 +189,57 @@ function LandingPage() {
                                 <div className="flex text-amber-500 mb-0.5">
                                     {[1, 2, 3, 4, 5].map((i) => <Star key={i} size={14} fill="currentColor" />)}
                                 </div>
-                                <p className="text-xs font-bold text-slate-900">4.9/5 from 2,000+ patients</p>
+                                <p className="text-xs font-bold text-gray-900">4.9/5 from 2,000+ patients</p>
                             </div>
                         </motion.div>
                     </motion.div>
 
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
+                        initial={{ opacity: 0, scale: 0.9, rotate: 2 }}
                         animate={{ opacity: 1, scale: 1, rotate: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className="relative"
                     >
-                        <div className="absolute -inset-4 bg-gradient-to-tr from-indigo-200 to-violet-200 blur-2xl opacity-30 -z-10 rounded-[40px]" />
-                        <div className="glass-card rounded-[40px] p-2 aspect-[4/5] lg:aspect-square overflow-hidden">
-                            <div className="w-full h-full rounded-[34px] bg-slate-900 relative overflow-hidden group">
+                        <div className="absolute -inset-4 bg-indigo-50/50 rounded-full blur-[100px] animate-pulse" />
+                        <div className="glass-card rounded-[32px] p-2 aspect-[4/5] lg:aspect-square overflow-hidden">
+                            <div className="w-full h-full rounded-[28px] bg-slate-900 relative overflow-hidden group">
                                 {/* Dashboard UI Simulation */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-950 p-8">
-                                    <div className="flex justify-between items-center mb-10">
-                                        <div className="flex gap-2">
-                                            <div className="w-3 h-3 rounded-full bg-rose-500" />
-                                            <div className="w-3 h-3 rounded-full bg-amber-500" />
-                                            <div className="w-3 h-3 rounded-full bg-emerald-500" />
+                                <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-950 p-6">
+                                    <div className="flex justify-between items-center mb-8">
+                                        <div className="flex gap-1.5">
+                                            <div className="w-2.5 h-2.5 rounded-full bg-rose-500" />
+                                            <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                                            <div className="w-2.5 h-2.5 rounded-full bg-blue-500" />
                                         </div>
-                                        <div className="px-3 py-1 rounded-full bg-white/10 text-[10px] text-white/50 font-bold uppercase tracking-wider">
+                                        <div className="px-2.5 py-0.5 rounded-full bg-white/10 text-[9px] text-white/50 font-bold uppercase tracking-wider">
                                             Live Dashboard
                                         </div>
                                     </div>
 
-                                    <div className="space-y-6">
-                                        <div className="h-12 w-3/4 rounded-2xl bg-white/10 animate-pulse" />
-                                        <div className="grid grid-cols-2 gap-4">
-                                            <div className="h-32 rounded-3xl bg-indigo-500/20 border border-indigo-500/30 p-4">
-                                                <Users className="text-indigo-400 mb-2" size={24} />
-                                                <div className="text-2xl font-bold text-white">42</div>
-                                                <div className="text-[10px] text-indigo-300 font-bold uppercase">Today's Patients</div>
+                                    <div className="space-y-5">
+                                        <div className="h-10 w-3/4 rounded-xl bg-white/10 animate-pulse" />
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <div className="h-28 rounded-2xl bg-blue-500/20 border border-blue-500/30 p-4">
+                                                <Users className="text-blue-400 mb-2" size={20} />
+                                                <div className="text-xl font-bold text-white">42</div>
+                                                <div className="text-[9px] text-blue-300 font-bold uppercase">Today's Patients</div>
                                             </div>
-                                            <div className="h-32 rounded-3xl bg-emerald-500/20 border border-emerald-500/30 p-4">
-                                                <Calendar className="text-emerald-400 mb-2" size={24} />
-                                                <div className="text-2xl font-bold text-white">98%</div>
-                                                <div className="text-[10px] text-emerald-300 font-bold uppercase">Efficiency</div>
+                                            <div className="h-28 rounded-2xl bg-blue-500/20 border border-blue-500/30 p-4">
+                                                <Calendar className="text-blue-400 mb-2" size={20} />
+                                                <div className="text-xl font-bold text-white">98%</div>
+                                                <div className="text-[9px] text-blue-300 font-bold uppercase">Efficiency</div>
                                             </div>
                                         </div>
-                                        <div className="p-4 rounded-3xl bg-white/5 border border-white/10">
-                                            <div className="flex items-center gap-3 mb-4">
-                                                <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white">
-                                                    <Sparkles size={16} />
+                                        <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                                            <div className="flex items-center gap-2.5 mb-3">
+                                                <div className="w-7 h-7 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                                                    <Sparkles size={14} />
                                                 </div>
-                                                <div className="text-sm font-bold text-white">AI Assistant</div>
+                                                <div className="text-xs font-bold text-white">AI Assistant</div>
                                             </div>
-                                            <div className="space-y-2">
-                                                <div className="h-2 w-full bg-white/10 rounded-full" />
-                                                <div className="h-2 w-4/5 bg-white/10 rounded-full" />
-                                                <div className="h-2 w-1/2 bg-white/10 rounded-full" />
+                                            <div className="space-y-1.5">
+                                                <div className="h-1.5 w-full bg-white/10 rounded-full" />
+                                                <div className="h-1.5 w-4/5 bg-white/10 rounded-full" />
                                             </div>
                                         </div>
                                     </div>
@@ -253,53 +252,53 @@ function LandingPage() {
 
                         {/* Floating Elements */}
                         <motion.div
-                            animate={{ y: [0, -20, 0] }}
+                            animate={{ y: [0, -15, 0] }}
                             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute -right-8 top-1/4 glass-card p-4 rounded-2xl flex items-center gap-3 shadow-2xl"
+                            className="absolute -right-4 top-1/4 glass-card p-3 rounded-xl flex items-center gap-2.5 shadow-xl"
                         >
-                            <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600">
-                                <CheckCircle2 size={24} />
+                            <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
+                                <CheckCircle2 size={18} />
                             </div>
                             <div>
-                                <p className="text-xs font-bold text-slate-500 uppercase">Status</p>
-                                <p className="text-sm font-extrabold">Booking Confirmed</p>
+                                <p className="text-[9px] font-bold text-gray-500 uppercase">Status</p>
+                                <p className="text-xs font-extrabold">Booking Confirmed</p>
                             </div>
                         </motion.div>
 
                         <motion.div
-                            animate={{ y: [0, 20, 0] }}
+                            animate={{ y: [0, 15, 0] }}
                             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute -left-12 bottom-1/4 glass-card p-5 rounded-3xl shadow-2xl"
+                            className="absolute -left-8 bottom-1/4 glass-card p-4 rounded-2xl shadow-xl"
                         >
-                            <div className="flex items-center gap-2 mb-2">
-                                <MessageSquare className="text-indigo-600" size={20} />
-                                <span className="text-xs font-extrabold text-slate-900">AI Support</span>
+                            <div className="flex items-center gap-2 mb-1.5">
+                                <MessageSquare className="text-blue-600" size={16} />
+                                <span className="text-[10px] font-extrabold text-gray-900">AI Support</span>
                             </div>
-                            <p className="text-xs text-slate-600 max-w-[120px]">"I've found a slot at 4:30 PM today."</p>
+                            <p className="text-[10px] text-gray-600 max-w-[100px]">"I've found a slot at 4:30 PM today."</p>
                         </motion.div>
                     </motion.div>
                 </div>
             </section>
 
             {/* Trust Logos */}
-            <section className="py-12 border-y border-slate-100 bg-white">
+            <section className="py-12 border-y border-gray-100 bg-white">
                 <div className="max-w-7xl mx-auto px-6">
-                    <p className="text-center text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] mb-10">Trusted by leading medical associations</p>
+                    <p className="text-center text-[10px] font-bold text-indigo-600 uppercase tracking-[0.3em] mb-10">Trusted by leading medical associations</p>
                     <div className="flex flex-wrap justify-center gap-12 md:gap-20 opacity-40 grayscale">
                         {['HealthCare+', 'DentalOrg', 'SmileShield', 'BioMed', 'LifeClinic'].map((logo) => (
-                            <span key={logo} className="text-xl font-black text-slate-900 tracking-tighter italic">{logo}</span>
+                            <span key={logo} className="text-xl font-black text-indigo-600 tracking-tighter italic">{logo}</span>
                         ))}
                     </div>
                 </div>
             </section>
 
             {/* Services Section */}
-            <section id="services" className="py-24 bg-slate-50 relative overflow-hidden">
+            <section id="services" className="py-24 bg-indigo-50 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
-                    <div className="text-center max-w-3xl mx-auto mb-20">
-                        <h2 className="text-sm font-bold text-indigo-600 uppercase tracking-widest mb-4">Our Expertise</h2>
-                        <h3 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">Everything you need for a <span className="text-indigo-600">perfect smile.</span></h3>
-                        <p className="text-lg text-slate-600">We offer a wide range of services powered by the latest dental technology and a patient-first approach.</p>
+                    <div className="text-center max-w-2xl mx-auto mb-16">
+                        <h2 className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-3">Our Expertise</h2>
+                        <h3 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-5 tracking-tight">Everything you need for a <span className="text-indigo-600">perfect smile.</span></h3>
+                        <p className="text-base text-gray-600">We offer a wide range of services powered by latest dental technology and a patient-first approach.</p>
                     </div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -337,7 +336,7 @@ function LandingPage() {
                                 title: 'Restorative Care',
                                 desc: 'Premium implants, crowns, and bridges to restore your natural look.',
                                 icon: <CheckCircle2 size={32} />,
-                                color: 'bg-emerald-50 text-emerald-600'
+                                color: 'bg-indigo-50 text-indigo-600'
                             },
                             {
                                 id: 'oral-surgery',
@@ -349,24 +348,24 @@ function LandingPage() {
                         ].map((service, i) => (
                             <motion.div
                                 key={i}
-                                whileHover={{ y: -10 }}
-                                className="group p-8 rounded-[40px] bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-100/50 transition-all duration-300"
+                                whileHover={{ y: -5 }}
+                                className="group p-5 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg hover:shadow-indigo-100/30 transition-all duration-300"
                             >
-                                <div className={`w-16 h-16 rounded-3xl ${service.color} flex items-center justify-center mb-8 group-hover:scale-110 transition-transform`}>
-                                    {service.icon}
+                                <div className={`w-14 h-14 rounded-2xl ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                                    {React.cloneElement(service.icon, { size: 28 })}
                                 </div>
-                                <h4 className="text-xl font-extrabold text-slate-900 mb-4">{service.title}</h4>
-                                <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-1">{service.desc}</p>
-                                <div className="flex items-center gap-3 pt-4 border-t border-slate-50">
+                                <h4 className="text-lg font-extrabold text-gray-900 mb-3">{service.title}</h4>
+                                <p className="text-gray-600 text-xs leading-relaxed mb-5 flex-1">{service.desc}</p>
+                                <div className="flex items-center gap-2.5 pt-4 border-t border-gray-50">
                                     <button
                                         onClick={() => setChatOpen(true)}
-                                        className="flex-1 bg-slate-950 text-white py-3 rounded-2xl text-xs font-bold hover:bg-slate-800 transition-all active:scale-95 flex items-center justify-center gap-2"
+                                        className="flex-1 bg-gray-900 text-white py-2 rounded-lg text-[10px] font-semibold hover:bg-gray-800 transition-all active:scale-95 flex items-center justify-center gap-1.5"
                                     >
-                                        Book Now <ArrowRight size={14} />
+                                        Book Now <ArrowRight size={12} />
                                     </button>
                                     <Link
                                         to={`/service/${service.id}`}
-                                        className="flex-1 py-3 rounded-2xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all text-center border border-slate-100"
+                                        className="flex-1 py-2 rounded-lg text-[10px] font-semibold text-gray-600 hover:bg-gray-50 transition-all text-center border border-gray-100"
                                     >
                                         Details
                                     </Link>
@@ -382,23 +381,23 @@ function LandingPage() {
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-20 items-center">
                         <div>
-                            <h2 className="text-sm font-bold text-indigo-600 uppercase tracking-widest mb-4">Precision Technology</h2>
-                            <h3 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-8 tracking-tight">The intersection of <span className="text-indigo-600">AI and medicine.</span></h3>
-                            <p className="text-lg text-slate-600 mb-10 leading-relaxed">We've pioneered a patient-first workflow that leverages artificial intelligence to predict outcomes, minimize pain, and automate the tedious parts of healthcare.</p>
+                            <h2 className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-3">Precision Technology</h2>
+                            <h3 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6 tracking-tight">The intersection of <span className="text-indigo-600">AI and medicine.</span></h3>
+                            <p className="text-base text-gray-600 mb-8 leading-relaxed">We've pioneered a patient-first workflow that leverages artificial intelligence to predict outcomes, minimize pain, and automate the tedious parts of healthcare.</p>
 
-                            <div className="space-y-6">
+                            <div className="space-y-4">
                                 {[
                                     { title: 'AI Diagnostics', desc: 'Neural networks detect issues 40% faster than traditional methods.', icon: <Sparkles className="text-indigo-600" /> },
                                     { title: 'Digital Scanning', desc: 'No more messy molds. 3D intraoral scans in under 60 seconds.', icon: <CheckCircle2 className="text-indigo-600" /> },
                                     { title: 'Guided Surgeries', desc: 'Robotic precision for dental implants and restorative work.', icon: <Shield className="text-indigo-600" /> }
                                 ].map((item, i) => (
-                                    <div key={i} className="flex gap-4 p-4 rounded-3xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
-                                        <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                    <div key={i} className="flex gap-4 p-3 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100">
+                                        <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center flex-shrink-0">
                                             {item.icon}
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-slate-900">{item.title}</h4>
-                                            <p className="text-sm text-slate-500 font-medium">{item.desc}</p>
+                                            <h4 className="font-bold text-gray-900">{item.title}</h4>
+                                            <p className="text-sm text-gray-500 font-medium">{item.desc}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -406,28 +405,28 @@ function LandingPage() {
                         </div>
 
                         <div className="relative">
-                            <div className="absolute -inset-10 bg-indigo-100/50 rounded-full blur-[100px] animate-pulse" />
-                            <div className="relative glass-card rounded-[40px] p-8 border border-slate-200">
-                                <div className="aspect-video bg-slate-900 rounded-[30px] overflow-hidden relative shadow-2xl">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-violet-500/20 mix-blend-overlay" />
+                            <div className="absolute -inset-10 bg-indigo-50/50 rounded-full blur-[100px] animate-pulse" />
+                            <div className="relative glass-card rounded-[32px] p-6 border border-gray-200">
+                                <div className="aspect-video bg-slate-900 rounded-[24px] overflow-hidden relative shadow-2xl">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-indigo-500/20 mix-blend-overlay" />
                                     <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white cursor-pointer hover:scale-110 transition-transform">
-                                            <Play fill="white" size={32} />
+                                        <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white cursor-pointer hover:scale-110 transition-transform">
+                                            <Play fill="white" size={24} />
                                         </div>
                                     </div>
-                                    <div className="absolute bottom-6 left-6 right-6 p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/10 text-white">
-                                        <div className="text-[10px] font-bold uppercase tracking-widest mb-1 opacity-60">Now Watching</div>
-                                        <div className="text-sm font-bold">The AI Clinic Experience</div>
+                                    <div className="absolute bottom-4 left-4 right-4 p-3 bg-white/10 backdrop-blur-md rounded-xl border border-white/10 text-white">
+                                        <div className="text-[9px] font-bold uppercase tracking-widest mb-0.5 opacity-60">Now Watching</div>
+                                        <div className="text-xs font-bold">The AI Clinic Experience</div>
                                     </div>
                                 </div>
-                                <div className="mt-8 grid grid-cols-2 gap-4">
-                                    <div className="p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
-                                        <div className="text-2xl font-black text-indigo-600">0.5mm</div>
-                                        <div className="text-[10px] font-bold text-indigo-700 uppercase tracking-wider">Scanning Precision</div>
+                                <div className="mt-6 grid grid-cols-2 gap-3">
+                                    <div className="p-3 bg-indigo-50 rounded-xl border border-indigo-100">
+                                        <div className="text-xl font-black text-indigo-600">0.5mm</div>
+                                        <div className="text-[9px] font-bold text-indigo-700 uppercase tracking-wider">Scanning Precision</div>
                                     </div>
-                                    <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
-                                        <div className="text-2xl font-black text-emerald-600">60sec</div>
-                                        <div className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Booking Speed</div>
+                                    <div className="p-3 bg-indigo-50 rounded-xl border border-indigo-100">
+                                        <div className="text-xl font-black text-indigo-600">60sec</div>
+                                        <div className="text-[9px] font-bold text-indigo-700 uppercase tracking-wider">Booking Speed</div>
                                     </div>
                                 </div>
                             </div>
@@ -439,17 +438,17 @@ function LandingPage() {
             {/* Bookings Feed */}
             <section id="bookings" className="py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-6">
-                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                         <div>
-                            <h2 className="text-sm font-bold text-emerald-600 uppercase tracking-widest mb-4">Live Updates</h2>
-                            <h3 className="text-4xl font-extrabold text-slate-900 tracking-tight">Recent Reservations</h3>
+                            <h2 className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-3">Live Updates</h2>
+                            <h3 className="text-3xl font-extrabold text-gray-900 tracking-tight">Recent Reservations</h3>
                         </div>
-                        <div className="flex items-center gap-4 bg-slate-50 p-2 rounded-2xl border border-slate-100">
-                            <div className="px-4 py-2 bg-white rounded-xl shadow-sm text-sm font-bold text-slate-900">
+                        <div className="flex items-center gap-3 bg-gray-50 p-1.5 rounded-xl border border-gray-100">
+                            <div className="px-3 py-1.5 bg-white rounded-lg shadow-sm text-xs font-bold text-gray-900">
                                 {bookings.length} Total
                             </div>
-                            <div className="flex items-center gap-1.5 pr-4 text-[10px] font-bold text-emerald-600 animate-pulse">
-                                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                            <div className="flex items-center gap-1 pr-3 text-[9px] font-bold text-indigo-600 animate-pulse">
+                                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
                                 LIVE
                             </div>
                         </div>
@@ -457,40 +456,40 @@ function LandingPage() {
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {bookings.length === 0 ? (
-                            <div className="col-span-full py-20 border-2 border-dashed border-slate-200 rounded-[40px] text-center">
-                                <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-400">
+                            <div className="col-span-full py-20 border-2 border-dashed border-indigo-200 rounded-[40px] text-center">
+                                <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6 text-indigo-600">
                                     <Calendar size={32} />
                                 </div>
-                                <p className="text-slate-500 font-medium">No bookings yet. Start the AI chat to book!</p>
+                                <p className="text-indigo-300 font-medium">No bookings yet. Start AI chat to book!</p>
                             </div>
                         ) : (
                             bookings.slice(0, 6).map((booking) => (
                                 <motion.div
-                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     key={booking.id}
-                                    className="p-6 rounded-3xl bg-slate-50 border border-slate-100 flex flex-col justify-between"
+                                    className="p-5 rounded-2xl bg-gray-50 border border-gray-100 flex flex-col justify-between"
                                 >
                                     <div>
-                                        <div className="flex justify-between items-start mb-4">
-                                            <div className="px-3 py-1 rounded-full bg-white text-[10px] font-bold text-indigo-600 uppercase border border-indigo-100">
+                                        <div className="flex justify-between items-start mb-3">
+                                            <div className="px-2 py-0.5 rounded-full bg-white text-[9px] font-bold text-indigo-600 uppercase border border-indigo-100">
                                                 {booking.service}
                                             </div>
-                                            <div className="text-[10px] font-bold text-slate-400">ID: {String(booking.id || '').slice(0, 8)}</div>
+                                            <div className="text-[9px] font-bold text-gray-400">ID: {String(booking.id || '').slice(0, 8)}</div>
                                         </div>
-                                        <div className="text-lg font-bold text-slate-900 mb-1">{booking.name}</div>
-                                        <div className="flex items-center gap-2 text-sm text-slate-500">
-                                            <Calendar size={14} />
+                                        <div className="text-base font-bold text-gray-900 mb-1">{booking.name}</div>
+                                        <div className="flex items-center gap-2 text-xs text-gray-500">
+                                            <Calendar size={12} />
                                             {booking.date}
                                         </div>
                                     </div>
-                                    <div className="mt-6 pt-4 border-t border-slate-200/50 flex items-center justify-between">
-                                        <div className="flex items-center gap-2 text-sm font-bold text-slate-900">
-                                            <Clock size={14} className="text-indigo-600" />
+                                    <div className="mt-5 pt-3 border-t border-gray-200/50 flex items-center justify-between">
+                                        <div className="flex items-center gap-2 text-xs font-bold text-gray-900">
+                                            <Clock size={12} className="text-indigo-600" />
                                             {booking.time}
                                         </div>
-                                        <div className="text-[10px] font-bold text-emerald-600 flex items-center gap-1">
-                                            <CheckCircle2 size={12} />
+                                        <div className="text-[9px] font-bold text-indigo-600 flex items-center gap-1">
+                                            <CheckCircle2 size={10} />
                                             CONFIRMED
                                         </div>
                                     </div>
@@ -508,18 +507,18 @@ function LandingPage() {
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="grid lg:grid-cols-[1fr_1.5fr] gap-20 items-center">
                         <div>
-                            <h2 className="text-sm font-bold text-indigo-400 uppercase tracking-widest mb-6">Patient Stories</h2>
-                            <h3 className="text-5xl font-extrabold mb-8 leading-tight">Loved by the <span className="text-indigo-400">community.</span></h3>
-                            <p className="text-slate-400 text-lg mb-10">We pride ourselves on providing exceptional care that leaves our patients smiling.</p>
+                            <h2 className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mb-5">Patient Stories</h2>
+                            <h3 className="text-4xl font-extrabold mb-6 leading-tight">Loved by the <span className="text-indigo-400">community.</span></h3>
+                            <p className="text-gray-400 text-base mb-8">We pride ourselves on providing exceptional care that leaves our patients smiling.</p>
 
-                            <div className="flex gap-12">
+                            <div className="flex gap-10">
                                 <div>
-                                    <div className="text-4xl font-bold mb-1">4.9/5</div>
-                                    <div className="text-xs uppercase font-bold text-slate-500 tracking-wider">Average Rating</div>
+                                    <div className="text-3xl font-bold mb-0.5">4.9/5</div>
+                                    <div className="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Average Rating</div>
                                 </div>
                                 <div>
-                                    <div className="text-4xl font-bold mb-1">2k+</div>
-                                    <div className="text-xs uppercase font-bold text-slate-500 tracking-wider">Happy Patients</div>
+                                    <div className="text-3xl font-bold mb-0.5">2k+</div>
+                                    <div className="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Happy Patients</div>
                                 </div>
                             </div>
                         </div>
@@ -551,7 +550,7 @@ function LandingPage() {
                                     <div className="flex text-amber-500 mb-6 font-bold">
                                         {[1, 2, 3, 4, 5].map((s) => <Star key={s} size={16} fill="currentColor" />)}
                                     </div>
-                                    <p className="text-slate-300 mb-8 italic leading-relaxed">"{t.text}"</p>
+                                    <p className="text-gray-300 mb-8 italic leading-relaxed">"{t.text}"</p>
                                     <div className="flex items-center gap-4">
                                         <div className="w-12 h-12 rounded-full bg-slate-800 p-0.5 border border-white/20">
                                             <img src={`https://i.pravatar.cc/150?u=${i + 10}`} className="w-full h-full rounded-full" alt="" />
@@ -574,12 +573,12 @@ function LandingPage() {
                     <div className="relative rounded-[60px] bg-indigo-600 p-12 md:p-20 overflow-hidden text-center shadow-2xl shadow-indigo-200">
                         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
                         <div className="relative z-10">
-                            <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-8 tracking-tight">Ready for a better <br /> dental experience?</h2>
-                            <p className="text-indigo-100 text-lg mb-12 max-w-2xl mx-auto">Join thousands of patients who have switched to a smarter way of caring for their smiles.</p>
-                            <div className="flex flex-wrap justify-center gap-6">
+                            <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">Ready for a better <br /> dental experience?</h2>
+                            <p className="text-indigo-100 text-base mb-10 max-w-xl mx-auto">Join thousands of patients who have switched to a smarter way of caring for their smiles.</p>
+                            <div className="flex flex-wrap justify-center gap-5">
                                 <button
                                     onClick={() => setChatOpen(true)}
-                                    className="px-10 py-5 bg-white text-indigo-600 rounded-3xl font-extrabold hover:bg-indigo-50 transition-all shadow-xl shadow-black/10 active:scale-95 text-lg"
+                                    className="px-8 py-4 bg-white text-indigo-700 rounded-2xl font-extrabold hover:bg-indigo-50 transition-all shadow-xl shadow-black/10 active:scale-95 text-base"
                                 >
                                     Book Your Appointment
                                 </button>
@@ -597,7 +596,7 @@ function LandingPage() {
             </section>
 
             {/* Footer */}
-            <footer className="py-20 bg-slate-50 border-t border-slate-200">
+            <footer className="py-20 bg-gray-50 border-t border-gray-200">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid md:grid-cols-4 gap-12 mb-20">
                         <div className="col-span-2">
@@ -605,14 +604,14 @@ function LandingPage() {
                                 <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white">
                                     <Stethoscope size={24} />
                                 </div>
-                                <span className="text-2xl font-black text-slate-900 tracking-tight">SmileCare</span>
+                                <span className="text-2xl font-black text-gray-900 tracking-tight">SmileCare</span>
                             </div>
-                            <p className="text-slate-500 max-w-sm leading-relaxed mb-8 font-medium">
+                            <p className="text-gray-500 max-w-sm leading-relaxed mb-8 font-medium">
                                 Modernizing dentistry through AI-assisted operations and patient-centric design. Experience the future of oral healthcare today.
                             </p>
                             <div className="flex gap-4">
                                 {[1, 2, 3, 4].map((i) => (
-                                    <div key={i} className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:border-indigo-600 transition-colors cursor-pointer">
+                                    <div key={i} className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-indigo-600 hover:border-indigo-600 transition-colors cursor-pointer">
                                         <Sparkles size={18} />
                                     </div>
                                 ))}
@@ -620,26 +619,26 @@ function LandingPage() {
                         </div>
 
                         <div>
-                            <h4 className="font-bold text-slate-900 mb-8 uppercase tracking-widest text-xs">Resources</h4>
+                            <h4 className="font-bold text-gray-900 mb-8 uppercase tracking-widest text-xs">Resources</h4>
                             <ul className="space-y-4">
                                 {['About Us', 'Services', 'Our Team', 'AI Lab', 'Contact'].map((item) => (
                                     <li key={item}>
-                                        <a href="#" className="text-slate-500 hover:text-indigo-600 font-bold text-sm transition-colors">{item}</a>
+                                        <a href="#" className="text-gray-500 hover:text-indigo-600 font-bold text-sm transition-colors">{item}</a>
                                     </li>
                                 ))}
                             </ul>
                         </div>
 
                         <div>
-                            <h4 className="font-bold text-slate-900 mb-8 uppercase tracking-widest text-xs">Contact</h4>
+                            <h4 className="font-bold text-gray-900 mb-8 uppercase tracking-widest text-xs">Contact</h4>
                             <ul className="space-y-6">
                                 <li className="flex gap-4">
                                     <div className="w-10 h-10 rounded-full bg-indigo-50 flex-shrink-0 flex items-center justify-center text-indigo-600">
                                         <Phone size={18} />
                                     </div>
                                     <div>
-                                        <div className="text-[10px] font-bold text-slate-400 uppercase">Support</div>
-                                        <a href="tel:5551234567" className="text-sm font-bold text-slate-900 hover:text-indigo-600 transition-colors">(555) 123-4567</a>
+                                        <div className="text-[10px] font-bold text-gray-400 uppercase">Support</div>
+                                        <a href="tel:5551234567" className="text-sm font-bold text-gray-900 hover:text-indigo-600 transition-colors">(555) 123-4567</a>
                                     </div>
                                 </li>
                                 <li className="flex gap-4">
@@ -647,8 +646,8 @@ function LandingPage() {
                                         <MessageSquare size={18} />
                                     </div>
                                     <div>
-                                        <div className="text-[10px] font-bold text-slate-400 uppercase">Email</div>
-                                        <a href="mailto:hello@smilecare.ai" className="text-sm font-bold text-slate-900 hover:text-indigo-600 transition-colors">hello@smilecare.ai</a>
+                                        <div className="text-[10px] font-bold text-gray-400 uppercase">Email</div>
+                                        <a href="mailto:hello@smilecare.ai" className="text-sm font-bold text-gray-900 hover:text-indigo-600 transition-colors">hello@smilecare.ai</a>
                                     </div>
                                 </li>
                             </ul>
@@ -656,10 +655,10 @@ function LandingPage() {
                     </div>
 
                     <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-6">
-                        <p className="text-slate-400 text-sm font-medium">© 2026 SmileCare Dental Studio. All rights reserved.</p>
+                        <p className="text-gray-400 text-sm font-medium">© 2026 SmileCare Dental Studio. All rights reserved.</p>
                         <div className="flex gap-8">
-                            <a href="#" className="text-slate-400 hover:text-slate-900 text-sm font-medium">Privacy Policy</a>
-                            <a href="#" className="text-slate-400 hover:text-slate-900 text-sm font-medium">Terms of Service</a>
+                            <a href="#" className="text-gray-400 hover:text-gray-900 text-sm font-medium">Privacy Policy</a>
+                            <a href="#" className="text-gray-400 hover:text-gray-900 text-sm font-medium">Terms of Service</a>
                         </div>
                     </div>
                 </div>
