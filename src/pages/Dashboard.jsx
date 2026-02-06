@@ -88,6 +88,7 @@ function Dashboard() {
         { name: 'Settings', icon: <Settings size={20} /> },
     ];
     const allServices = [
+        'AI Bot Reservation',
         'General Dentistry',
         'Cosmetic Studio',
         'AI Diagnostics',
