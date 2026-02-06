@@ -34,25 +34,25 @@
   }
 
   body {
-    @apply bg-blue-300 text-gray-900 selection:bg-indigo-100 selection:text-indigo-900;
+    @apply bg-slate-50 text-gray-900 selection:bg-indigo-100 selection:text-indigo-900;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply backdrop-blur-md bg-white/60 border border-white/30 shadow-lg shadow-gray-200/40;
+    @apply bg-white border border-slate-200 shadow-sm;
   }
 
   .btn-primary {
-    @apply relative inline-flex items-center justify-center px-5 py-2 font-semibold text-white transition-all duration-300 bg-indigo-600 rounded-lg hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-200 active:scale-95 overflow-hidden;
+    @apply relative inline-flex items-center justify-center px-5 py-2 text-white transition-all duration-300 bg-blue-600 rounded-lg hover:bg-blue-700 active:scale-95 overflow-hidden;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-5 py-2 font-semibold text-gray-700 transition-all duration-300 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 active:scale-95;
+    @apply inline-flex items-center justify-center px-5 py-2 text-gray-700 transition-all duration-300 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 active:scale-95;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600 font-semibold;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-sky-500;
   }
 
   .section-padding {

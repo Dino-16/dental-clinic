@@ -19,7 +19,7 @@ function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-blue-300 flex flex-col justify-center items-center px-6 relative overflow-hidden selection:bg-blue-100 selection:text-blue-900">
+        <div className="min-h-screen bg-slate-50 flex flex-col justify-center items-center px-6 relative overflow-hidden selection:bg-blue-100 selection:text-blue-900">
             {/* Background decoration */}
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
                 <div className="absolute -top-12 -left-12 w-64 h-64 bg-blue-200/20 rounded-full blur-[80px]" />
@@ -41,13 +41,13 @@ function LoginPage() {
                             <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mt-0.5">Secure Admin Portal</span>
                         </div>
                     </Link>
-                    <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Admin Authentication</h1>
+                    <h1 className="text-2xl font-normal text-slate-900 tracking-tight">Admin Access</h1>
                 </div>
 
                 <div className="bg-white p-8 rounded-3xl shadow-xl shadow-slate-200/40 border border-slate-100">
                     <form onSubmit={handleLogin} className="space-y-5">
                         <div>
-                            <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 mb-2">Access Key</label>
+                            <label className="block text-[10px] font-normal text-slate-400 uppercase tracking-widest ml-1 mb-2">Access Key</label>
                             <div className="relative group">
                                 <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors">
                                     <Lock size={16} />
@@ -57,7 +57,7 @@ function LoginPage() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     placeholder="••••••••"
-                                    className="w-full bg-slate-50 border border-slate-100 rounded-xl py-3.5 pl-11 pr-5 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:bg-white transition-all"
+                                    className="w-full bg-slate-50 border border-slate-100 rounded-xl py-3.5 pl-11 pr-5 text-sm focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:bg-white transition-all"
                                     required
                                 />
                             </div>
@@ -76,9 +76,9 @@ function LoginPage() {
 
                         <button
                             type="submit"
-                            className="w-full bg-slate-950 text-white rounded-xl py-3.5 font-black text-[11px] uppercase tracking-widest hover:bg-slate-800 transition-all active:scale-[0.97] shadow-lg shadow-slate-100 flex items-center justify-center gap-2 group"
+                            className="w-full bg-blue-600 text-white rounded-xl py-3.5 text-[11px] uppercase tracking-widest hover:bg-blue-700 transition-all active:scale-[0.97] shadow-lg shadow-blue-100 flex items-center justify-center gap-2 group"
                         >
-                            Establish Connection <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                            Connect <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                         </button>
                     </form>
 
