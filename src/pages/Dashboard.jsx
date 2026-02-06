@@ -415,7 +415,7 @@ function Dashboard() {
                                 value={formService}
                                 onChange={(e) => setFormService(e.target.value)}
                                 required
-                                className="bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-sm"
+                                className="w-full bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-sm"
                             >
                                 <option value="" disabled>Select a service</option>
                                 {allServices.map((s) => (
