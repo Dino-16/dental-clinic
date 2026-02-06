@@ -364,9 +364,9 @@ function Dashboard() {
                     <h3 className="text-lg font-normal text-slate-900 tracking-tight">Clinic Services</h3>
                     <span className="text-[10px] text-slate-400 uppercase tracking-widest">Visible to admins</span>
                 </div>
-                <div className="p-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {items.map((svc) => (
-                        <div key={svc.name} className="p-5 rounded-2xl bg-white border border-slate-100 hover:shadow-sm transition-all">
+                        <div key={svc.name} className="p-5 rounded-2xl bg-white border border-slate-100 hover:shadow-sm transition-all min-h-[120px]">
                             <div className="flex items-center justify-between mb-3">
                                 <div className="flex items-center gap-3">
                                     <div className="w-9 h-9 rounded-xl bg-slate-50 flex items-center justify-center text-slate-600">
