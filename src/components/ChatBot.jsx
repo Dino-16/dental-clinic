@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Send, X, Bot, User, Sparkles } from 'lucide-react';
 
 function ChatBot({ isOpen, onClose }) {
-    const { addBooking, addMessage } = useBookings();
+    const { addBooking, addMessage, allServices } = useBookings();
     const [messages, setMessages] = useState([
         {
             type: 'bot',
@@ -41,11 +41,14 @@ function ChatBot({ isOpen, onClose }) {
         let botResponse = { type: 'bot', text: '' };
 
         if (inputMessage.toLowerCase().includes('book') || inputMessage.toLowerCase().includes('appointment') || inputMessage.toLowerCase().includes('reservation')) {
-            botResponse.text = "I'd be happy to help you book an appointment! Let's get started. What dental service are you looking for today? (e.g., General Checkup, Teeth Cleaning, Whitening)";
+            const servicesList = allServices.join(', ');
+            botResponse.text = `I'd be happy to help you book an appointment! Let's get started. What dental service are you looking for? Available services are: ${servicesList}.`;
             setBookingStep(1);
         } else if (bookingStep === 1) {
-            setBookingData({ ...bookingData, service: inputMessage });
-            botResponse.text = `Great choice: **${inputMessage}**. What is your full name?`;
+            // Find closest match in allServices
+            const matchedService = allServices.find(s => s.toLowerCase().includes(inputMessage.toLowerCase())) || inputMessage;
+            setBookingData({ ...bookingData, service: matchedService });
+            botResponse.text = `Great choice: **${matchedService}**. What is your full name?`;
             setBookingStep(2);
         } else if (bookingStep === 2) {
             setBookingData({ ...bookingData, name: inputMessage });
@@ -62,6 +65,7 @@ function ChatBot({ isOpen, onClose }) {
                 service: bookingData.service,
                 date: bookingData.date,
                 time: inputMessage,
+                status: 'Confirmed',
                 createdAt: new Date().toISOString()
             };
             addBooking(confirmedBooking);

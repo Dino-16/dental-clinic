@@ -18,6 +18,7 @@ import {
     TrendingUp,
     ExternalLink,
     Trash2,
+    Pencil,
     Sparkles,
     X,
     Menu
@@ -36,7 +37,7 @@ import {
 } from 'date-fns';
 
 function Dashboard() {
-    const { bookings, deleteBooking, addBooking } = useBookings();
+    const { bookings, deleteBooking, addBooking, updateBooking, allServices } = useBookings();
     const navigate = useNavigate();
     const [viewMode, setViewMode] = useState('calendar');
     const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -45,10 +46,13 @@ function Dashboard() {
     const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [editingBooking, setEditingBooking] = useState(null);
     const [formName, setFormName] = useState('');
     const [formService, setFormService] = useState('');
     const [formDate, setFormDate] = useState('');
     const [formTime, setFormTime] = useState('');
+
     const handleAddManual = (e) => {
         e?.preventDefault?.();
         if (!formName || !formService || !formDate || !formTime) return;
@@ -61,11 +65,39 @@ function Dashboard() {
             status: 'Confirmed'
         };
         addBooking(newBooking);
+        resetForm();
+        setIsAddModalOpen(false);
+    };
+
+    const handleEditManual = (e) => {
+        e?.preventDefault?.();
+        if (!editingBooking || !formName || !formService || !formDate || !formTime) return;
+        updateBooking(editingBooking.id, {
+            name: formName,
+            service: formService,
+            date: formDate,
+            time: formTime,
+            status: editingBooking.status || 'Confirmed'
+        });
+        resetForm();
+        setIsEditModalOpen(false);
+    };
+
+    const resetForm = () => {
         setFormName('');
         setFormService('');
         setFormDate('');
         setFormTime('');
-        setIsAddModalOpen(false);
+        setEditingBooking(null);
+    };
+
+    const openEditModal = (booking) => {
+        setEditingBooking(booking);
+        setFormName(booking.name);
+        setFormService(booking.service);
+        setFormDate(booking.date);
+        setFormTime(booking.time);
+        setIsEditModalOpen(true);
     };
 
     useEffect(() => {
@@ -86,15 +118,6 @@ function Dashboard() {
         { name: 'Services', icon: <Stethoscope size={20} /> },
         { name: 'Patients', icon: <Users size={20} /> },
         { name: 'Settings', icon: <Settings size={20} /> },
-    ];
-    const allServices = [
-        'AI Bot Reservation',
-        'General Dentistry',
-        'Cosmetic Studio',
-        'AI Diagnostics',
-        'Emergency Care',
-        'Restorative Care',
-        'Oral Surgery'
     ];
 
     const renderOverview = () => (
@@ -169,7 +192,7 @@ function Dashboard() {
             <div className="grid grid-cols-1 gap-6">
                 {(() => {
                     const weekStart = startOfWeek(new Date());
-                    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+                    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                     const dayCounts = new Array(7).fill(0);
                     bookings.forEach(b => {
                         try {
@@ -186,7 +209,7 @@ function Dashboard() {
                             if (d.getTime() >= weekStart.getTime() && d.getTime() < endOfWeek(weekStart).getTime()) {
                                 dayCounts[d.getDay()] += 1;
                             }
-                        } catch {}
+                        } catch { }
                     });
                     const maxDay = Math.max(1, ...dayCounts);
                     return (
@@ -234,11 +257,19 @@ function Dashboard() {
                                     <p className="text-xs text-slate-900">New reservation: <span className="text-blue-600">{b.service}</span></p>
                                     <p className="text-[10px] text-slate-500">{b.name} · {b.date}</p>
                                 </div>
-                                <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-2">
                                     <div className="text-[9px] text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100 uppercase tracking-widest">Confirmed</div>
+                                    <button
+                                        onClick={() => openEditModal(b)}
+                                        className="p-1.5 text-slate-300 hover:text-blue-600 transition-colors"
+                                        title="Edit"
+                                    >
+                                        <Pencil size={14} />
+                                    </button>
                                     <button
                                         onClick={() => deleteBooking(b.id)}
                                         className="p-1.5 text-slate-300 hover:text-rose-600 transition-colors"
+                                        title="Delete"
                                     >
                                         <Trash2 size={14} />
                                     </button>
@@ -396,7 +427,7 @@ function Dashboard() {
                     <div className="p-6 border-b border-slate-50 flex items-center justify-between bg-white">
                         <h3 className="text-lg text-slate-900">Add Appointment</h3>
                         <button
-                            onClick={() => setIsAddModalOpen(false)}
+                            onClick={() => { setIsAddModalOpen(false); resetForm(); }}
                             className="w-9 h-9 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors"
                         >
                             <X size={18} />
@@ -408,6 +439,7 @@ function Dashboard() {
                             value={formName}
                             onChange={(e) => setFormName(e.target.value)}
                             placeholder="Patient Name"
+                            required
                             className="bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-sm"
                         />
                         <div>
@@ -429,25 +461,102 @@ function Dashboard() {
                                 type="date"
                                 value={formDate}
                                 onChange={(e) => setFormDate(e.target.value)}
+                                required
                                 className="bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-sm"
                             />
                             <input
                                 type="time"
                                 value={formTime}
                                 onChange={(e) => setFormTime(e.target.value)}
+                                required
                                 className="bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-sm"
                             />
                         </div>
                         <div className="flex justify-end gap-3 pt-2">
                             <button
                                 type="button"
-                                onClick={() => setIsAddModalOpen(false)}
+                                onClick={() => { setIsAddModalOpen(false); resetForm(); }}
                                 className="px-4 py-2 border border-slate-200 text-slate-600 rounded-lg text-sm hover:bg-slate-50 transition-colors"
                             >
                                 Cancel
                             </button>
                             <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">
                                 Add
+                            </button>
+                        </div>
+                    </form>
+                </motion.div>
+            </div>
+        );
+    };
+
+    const renderEditModal = () => {
+        if (!isEditModalOpen) return null;
+        return (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-sm">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    className="bg-white rounded-[28px] w-full max-w-lg overflow-hidden shadow-2xl border border-slate-100"
+                >
+                    <div className="p-6 border-b border-slate-50 flex items-center justify-between bg-white">
+                        <h3 className="text-lg text-slate-900">Edit Appointment</h3>
+                        <button
+                            onClick={() => { setIsEditModalOpen(false); resetForm(); }}
+                            className="w-9 h-9 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors"
+                        >
+                            <X size={18} />
+                        </button>
+                    </div>
+                    <form onSubmit={handleEditManual} className="p-6 grid grid-cols-1 gap-4">
+                        <input
+                            type="text"
+                            value={formName}
+                            onChange={(e) => setFormName(e.target.value)}
+                            placeholder="Patient Name"
+                            required
+                            className="bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-sm"
+                        />
+                        <div>
+                            <label className="block text-[10px] text-slate-400 uppercase tracking-widest ml-1 mb-2">Service</label>
+                            <select
+                                value={formService}
+                                onChange={(e) => setFormService(e.target.value)}
+                                required
+                                className="w-full bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-sm"
+                            >
+                                <option value="" disabled>Select a service</option>
+                                {allServices.map((s) => (
+                                    <option key={s} value={s}>{s}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <input
+                                type="date"
+                                value={formDate}
+                                onChange={(e) => setFormDate(e.target.value)}
+                                required
+                                className="bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-sm"
+                            />
+                            <input
+                                type="time"
+                                value={formTime}
+                                onChange={(e) => setFormTime(e.target.value)}
+                                required
+                                className="bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-sm"
+                            />
+                        </div>
+                        <div className="flex justify-end gap-3 pt-2">
+                            <button
+                                type="button"
+                                onClick={() => { setIsEditModalOpen(false); resetForm(); }}
+                                className="px-4 py-2 border border-slate-200 text-slate-600 rounded-lg text-sm hover:bg-slate-50 transition-colors"
+                            >
+                                Cancel
+                            </button>
+                            <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">
+                                Save Changes
                             </button>
                         </div>
                     </form>
@@ -724,7 +833,7 @@ function Dashboard() {
                         ))}
                     </nav>
 
-                    
+
 
                     {/* Compact Bottom Section */}
                     <div className="p-4 mt-auto border-t border-slate-50">
@@ -759,7 +868,7 @@ function Dashboard() {
                                         <Stethoscope size={24} />
                                     </div>
                                     <div>
-                                <span className="text-xl text-slate-900 tracking-tight block leading-none">SmileCare</span>
+                                        <span className="text-xl text-slate-900 tracking-tight block leading-none">SmileCare</span>
                                         <span className="text-[10px] text-blue-600 uppercase tracking-widest">Admin Cloud</span>
                                     </div>
                                 </div>
@@ -788,7 +897,7 @@ function Dashboard() {
                                     </button>
                                 ))}
                             </nav>
-                            
+
                             <div className="p-6 border-t border-slate-50">
                                 <button
                                     onClick={handleLogout}
@@ -900,12 +1009,22 @@ function Dashboard() {
                                                                         <CheckCircle2 size={12} />
                                                                         Verified
                                                                     </div>
-                                                                    <button
-                                                                        onClick={() => deleteBooking(booking.id)}
-                                                                        className="p-2 text-slate-300 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all"
-                                                                    >
-                                                                        <Trash2 size={16} />
-                                                                    </button>
+                                                                    <div className="flex items-center gap-2">
+                                                                        <button
+                                                                            onClick={() => openEditModal(booking)}
+                                                                            className="p-2 text-slate-300 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
+                                                                            title="Edit"
+                                                                        >
+                                                                            <Pencil size={16} />
+                                                                        </button>
+                                                                        <button
+                                                                            onClick={() => deleteBooking(booking.id)}
+                                                                            className="p-2 text-slate-300 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all"
+                                                                            title="Delete"
+                                                                        >
+                                                                            <Trash2 size={16} />
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -924,6 +1043,7 @@ function Dashboard() {
                 </div>
             </main>
             {renderAddModal()}
+            {renderEditModal()}
             {renderPatientModal()}
         </div>
     );

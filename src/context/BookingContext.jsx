@@ -143,8 +143,42 @@ export const BookingProvider = ({ children }) => {
         }
     };
 
+    const updateBooking = async (id, updatedFields) => {
+        // Optimistic update
+        setBookings((prev) => prev.map(b => b.id === id ? { ...b, ...updatedFields } : b));
+
+        if (!supabase) return;
+
+        try {
+            const { error } = await supabase
+                .from('bookings')
+                .update({
+                    patient_name: updatedFields.name,
+                    service: updatedFields.service,
+                    booking_date: updatedFields.date,
+                    booking_time: updatedFields.time,
+                    status: updatedFields.status
+                })
+                .eq('id', id);
+
+            if (error) throw error;
+        } catch (err) {
+            console.error('Error updating in Supabase:', err.message);
+        }
+    };
+
+    const allServices = [
+        'AI Bot Reservation',
+        'General Dentistry',
+        'Cosmetic Studio',
+        'AI Diagnostics',
+        'Emergency Care',
+        'Restorative Care',
+        'Oral Surgery'
+    ];
+
     return (
-        <BookingContext.Provider value={{ bookings, addBooking, messages, addMessage, deleteBooking }}>
+        <BookingContext.Provider value={{ bookings, addBooking, messages, addMessage, deleteBooking, updateBooking, allServices }}>
             {children}
         </BookingContext.Provider>
     );
