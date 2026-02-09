@@ -8,6 +8,7 @@ window.onerror = function (message, source, lineno, colno, error) {
   console.error('GLOBAL ERROR:', message, 'at', source, lineno, colno);
 };
 
+import { Analytics } from "@vercel/analytics/react"
 import ErrorBoundary from './components/ErrorBoundary.jsx'
 
 const rootElement = document.getElementById('root');
@@ -18,6 +19,7 @@ if (!rootElement) {
     <StrictMode>
       <ErrorBoundary>
         <App />
+        <Analytics />
       </ErrorBoundary>
     </StrictMode>,
   )
