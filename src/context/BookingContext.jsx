@@ -71,7 +71,23 @@ export const BookingProvider = ({ children }) => {
                         status: payload.new.status,
                         timestamp: payload.new.created_at
                     };
-                    setBookings(prev => [newBooking, ...prev]);
+                    setBookings(prev => {
+                        // 1. Check if ID already exists (from another client or previous sync)
+                        if (prev.some(b => b.id === newBooking.id)) return prev;
+
+                        // 2. Check for optimistic local records (match by content and temporal ID)
+                        // We filter out any record that matches the new one's content but has a temporary ID
+                        const deduplicated = prev.filter(b => {
+                            const isTempId = typeof b.id === 'number' || (typeof b.id === 'string' && (b.id.startsWith('BK-') || b.id.startsWith('BK_')));
+                            const isContentMatch = b.name === newBooking.name &&
+                                b.service === newBooking.service &&
+                                b.date === newBooking.date &&
+                                b.time === newBooking.time;
+                            return !(isTempId && isContentMatch);
+                        });
+
+                        return [newBooking, ...deduplicated];
+                    });
                 })
                 .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'bookings' }, payload => {
                     setBookings(prev => prev.filter(b => b.id !== payload.old.id));

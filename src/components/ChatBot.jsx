@@ -14,6 +14,7 @@ function ChatBot({ isOpen, onClose }) {
     const [inputMessage, setInputMessage] = useState('');
     const [bookingStep, setBookingStep] = useState(0);
     const [bookingData, setBookingData] = useState({});
+    const [isProcessing, setIsProcessing] = useState(false);
     const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
@@ -25,8 +26,9 @@ function ChatBot({ isOpen, onClose }) {
     }, [messages]);
 
     const handleSendMessage = () => {
-        if (!inputMessage.trim()) return;
+        if (!inputMessage.trim() || isProcessing) return;
 
+        setIsProcessing(true);
         const userMessage = { type: 'user', text: inputMessage };
         setMessages(prev => [...prev, userMessage]);
 
@@ -79,6 +81,7 @@ function ChatBot({ isOpen, onClose }) {
 
         setTimeout(() => {
             setMessages(prev => [...prev, botResponse]);
+            setIsProcessing(false);
         }, 800);
 
         setInputMessage('');
