@@ -1296,9 +1296,6 @@ function Dashboard() {
                                 )}
                             </motion.div>
                         )}
-                        {activeTab === 'Patients' && <motion.div key="patients" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>{renderPatients()}</motion.div>}
-                        {activeTab === 'Services' && <motion.div key="services" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>{renderServices()}</motion.div>}
-                        {activeTab === 'Settings' && <motion.div key="settings" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>{renderSettings()}</motion.div>}
                     </AnimatePresence>
                 </div>
             </main>
