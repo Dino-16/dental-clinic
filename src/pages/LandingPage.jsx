@@ -285,7 +285,7 @@ function LandingPage() {
                         <div className="w-7 h-7 rounded-full bg-blue-500 flex items-center justify-center text-white">
                           <Sparkles size={14} />
                         </div>
-                        <div className="text-xs text-white">AI Assistant</div>
+                        <div className="text-xs text-white">Smart Driven</div>
                       </div>
                       <div className="space-y-1.5">
                         <div className="h-1.5 w-full bg-white/10 rounded-full" />
@@ -322,7 +322,9 @@ function LandingPage() {
             >
               <div className="flex items-center gap-2 mb-1.5">
                 <MessageSquare className="text-blue-600" size={16} />
-                <span className="text-[10px] text-gray-900">AI Support</span>
+                <span className="text-[10px] text-gray-900">
+                  Chatbot Support
+                </span>
               </div>
               <p className="text-[10px] text-gray-600 max-w-[100px]">
                 "I've found a slot at 4:30 PM today."
@@ -471,18 +473,18 @@ function LandingPage() {
               </h2>
               <h3 className="text-3xl md:text-4xl font-normal text-gray-900 mb-6 tracking-tight">
                 The intersection of{" "}
-                <span className="text-blue-600">AI and medicine.</span>
+                <span className="text-blue-600">Medicine.</span>
               </h3>
               <p className="text-base text-gray-600 mb-8 leading-relaxed">
-                We've pioneered a patient-first workflow that leverages
-                artificial intelligence to predict outcomes, minimize pain, and
-                automate the tedious parts of healthcare.
+                We've pioneered a patient-first workflow that leverages smart
+                driven outcomes, minimize pain, and automate the tedious parts
+                of healthcare.
               </p>
 
               <div className="space-y-4">
                 {[
                   {
-                    title: "AI Diagnostics",
+                    title: "Smart Driven Diagnostics",
                     desc: "Neural networks detect issues 40% faster than traditional methods.",
                     icon: <Sparkles className="text-blue-600" />,
                   },
@@ -586,7 +588,7 @@ function LandingPage() {
                   <Calendar size={32} />
                 </div>
                 <p className="text-blue-300 font-medium">
-                  No bookings yet. Start AI chat to book!
+                  No bookings yet. Start Smart Chatbot to book!
                 </p>
               </div>
             ) : (
@@ -671,7 +673,7 @@ function LandingPage() {
             <div className="grid md:grid-cols-2 gap-6">
               {[
                 {
-                  text: "The AI booking tool is a game-changer. I booked my appointment in seconds at 11 PM!",
+                  text: "The Chatbot booking tool is a game-changer. I booked my appointment in seconds at 11 PM!",
                   name: "Sarah Miller",
                   role: "Client",
                 },
@@ -772,7 +774,7 @@ function LandingPage() {
                 </span>
               </div>
               <p className="text-gray-500 max-w-sm leading-relaxed mb-8 font-medium">
-                Modernizing dentistry through AI-assisted operations and
+                Modernizing dentistry through smart-assisted operations and
                 patient-centric design. Experience the future of oral healthcare
                 today.
               </p>
